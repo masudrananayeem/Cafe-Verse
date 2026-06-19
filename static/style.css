@@ -1,0 +1,279 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#faf8f2;
+    color:#333;
+}
+
+/* Navbar */
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    background:white;
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:700;
+    color:#6b4f3b;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#333;
+    font-weight:500;
+}
+
+.login-btn{
+    background:#6b4f3b;
+    color:white !important;
+    padding:10px 20px;
+    border-radius:8px;
+}
+
+/* Hero */
+
+.hero{
+    height:90vh;
+    background:
+    linear-gradient(rgba(0,0,0,.5),
+    rgba(0,0,0,.5)),
+    url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600");
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.hero-content{
+    color:white;
+    max-width:800px;
+}
+
+.hero-content h1{
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+.hero-content p{
+    font-size:20px;
+    line-height:1.8;
+}
+
+.hero-buttons{
+    margin-top:35px;
+}
+
+.primary-btn,
+.secondary-btn{
+    text-decoration:none;
+    padding:15px 30px;
+    border-radius:8px;
+    margin:10px;
+    display:inline-block;
+}
+
+.primary-btn{
+    background:#d4a762;
+    color:white;
+}
+
+.secondary-btn{
+    border:2px solid white;
+    color:white;
+}
+
+/* Features */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    padding:80px 8%;
+}
+
+.feature-card{
+    background:white;
+    padding:35px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+/* Menu */
+
+.menu{
+    padding:80px 8%;
+}
+
+.menu h2{
+    text-align:center;
+    margin-bottom:50px;
+    font-size:40px;
+}
+
+.tea-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.tea-card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.tea-card:hover{
+    transform:translateY(-10px);
+}
+
+.tea-card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+
+.tea-card h3,
+.tea-card p,
+.tea-card span{
+    padding:15px 20px;
+}
+
+.tea-card span{
+    color:#d4a762;
+    font-weight:700;
+}
+
+/* Stats */
+
+.stats{
+    background:#3e2c21;
+    color:white;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    text-align:center;
+    padding:70px 8%;
+}
+
+.stats h2{
+    color:#d4a762;
+    font-size:45px;
+}
+
+/* Reviews */
+
+.reviews{
+    padding:80px 8%;
+}
+
+.reviews h2{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.review-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.review-card{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+/* Newsletter */
+
+.newsletter{
+    background:#f0e7dc;
+    text-align:center;
+    padding:80px 8%;
+}
+
+.newsletter h2{
+    margin-bottom:15px;
+}
+
+.newsletter form{
+    margin-top:25px;
+}
+
+.newsletter input{
+    width:300px;
+    max-width:90%;
+    padding:14px;
+    border:none;
+    border-radius:8px;
+}
+
+.newsletter button{
+    padding:14px 25px;
+    border:none;
+    border-radius:8px;
+    background:#6b4f3b;
+    color:white;
+    cursor:pointer;
+}
+
+/* Footer */
+
+footer{
+    background:#2b1d15;
+    color:white;
+    text-align:center;
+    padding:40px;
+}
+
+footer h3{
+    margin-bottom:10px;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero-content h1{
+        font-size:42px;
+    }
+
+    .hero-content p{
+        font-size:16px;
+        padding:0 15px;
+    }
+}

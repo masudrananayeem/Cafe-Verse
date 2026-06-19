@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Cart</title>
+</head>
+
+<body>
+
+    <h1>🛒 My Cart</h1>
+
+    {% for item in cart_items %}
+
+    <div>
+
+        <h2>{{ item[0] }}</h2>
+
+        <p>Price: ${{ item[1] }}</p>
+
+        <p>Quantity: {{ item[2] }}</p>
+
+    </div>
+
+    <hr>
+
+    {% endfor %}
+
+</body>
+
+</html>

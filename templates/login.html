@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tea House | Login</title>
+
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Left Side -->
+
+        <div class="left">
+
+            <div class="content">
+                <h1>Welcome Back</h1>
+
+                <p>
+                    Sign in to access your Tea House account and continue
+                    exploring premium tea collections.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Right Side -->
+
+        <div class="right">
+
+            <div class="login-box">
+
+                <h2>Login</h2>
+
+                <form action="/login" method="POST">
+
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password"
+                            name="password"
+                            placeholder="Enter password"
+                            required>
+                    </div>
+
+                    <button
+                        type="submit"
+                        id="loginBtn">
+                        Sign In
+                    </button>
+
+                </form>
+
+                <p class="register-link">
+                    Don't have an account?
+                    <a href="/register">Register Now</a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

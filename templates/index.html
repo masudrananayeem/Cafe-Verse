@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe Verse</title>
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav>
+        <div class="logo">☕ CafeVerse</div>
+
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Tea Menu</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Reviews</a></li>
+            <li>
+                <a href="/admin-login"> 
+                    Admin Login
+                </a>
+            </li>
+            
+            <li><a href="/login" class="login-btn">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+            <h1>Fresh Tea For Every Mood</h1>
+
+            <p>
+                Enjoy premium handcrafted tea made from carefully selected
+                organic leaves. Taste the tradition in every sip.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#" class="primary-btn">Order Now</a>
+                <a href="#" class="secondary-btn">Explore Menu</a>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Features -->
+
+    <section class="features">
+
+        <div class="feature-card">
+            <h3>🌱 Organic Leaves</h3>
+            <p>100% natural and carefully selected tea leaves.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🚚 Fast Delivery</h3>
+            <p>Get your favorite tea delivered quickly.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>☕ Premium Taste</h3>
+            <p>Rich flavor crafted by tea experts.</p>
+        </div>
+
+    </section>
+
+    <!-- Tea Menu -->
+
+    <section class="menu">
+
+        <h2>Popular Tea Collection</h2>
+
+        <div class="tea-grid">
+
+            <div class="tea-card">
+                <img src="https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?w=500" alt="">
+                <h3>Green Tea</h3>
+                <p>Fresh organic tea leaves.</p>
+                <span>$5.99</span>
+            </div>
+
+            <div class="tea-card">
+                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500" alt="">
+                <h3>Black Tea</h3>
+                <p>Strong traditional flavor.</p>
+                <span>$6.99</span>
+            </div>
+
+            <div class="tea-card">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500" alt="">
+                <h3>Milk Tea</h3>
+                <p>Creamy and delicious.</p>
+                <span>$7.99</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Statistics -->
+
+    <section class="stats">
+
+        <div>
+            <h2>10K+</h2>
+            <p>Happy Customers</p>
+        </div>
+
+        <div>
+            <h2>50+</h2>
+            <p>Tea Varieties</p>
+        </div>
+
+        <div>
+            <h2>15+</h2>
+            <p>Years Experience</p>
+        </div>
+
+        <div>
+            <h2>100%</h2>
+            <p>Organic Quality</p>
+        </div>
+
+    </section>
+
+    <!-- Reviews -->
+
+    <section class="reviews">
+
+        <h2>Customer Reviews</h2>
+
+        <div class="review-grid">
+
+            <div class="review-card">
+                <p>"Best tea I've ever tasted. Highly recommended!"</p>
+                <h4>⭐⭐⭐⭐⭐</h4>
+            </div>
+
+            <div class="review-card">
+                <p>"Amazing service and premium quality tea."</p>
+                <h4>⭐⭐⭐⭐⭐</h4>
+            </div>
+
+            <div class="review-card">
+                <p>"Fresh taste and beautiful packaging."</p>
+                <h4>⭐⭐⭐⭐⭐</h4>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Newsletter -->
+
+    <section class="newsletter">
+
+        <h2>Get Special Offers</h2>
+
+        <p>Subscribe to receive updates and discounts.</p>
+
+        <form>
+            <input type="email" placeholder="Enter your email">
+            <button type="submit">Subscribe</button>
+        </form>
+
+    </section>
+
+    <!-- Footer -->
+
+    <footer>
+        <h3>Tea House</h3>
+        <p>Premium Tea Experience Since 2010</p>
+        <p>© 2026 All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>

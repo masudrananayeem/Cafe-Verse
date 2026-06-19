@@ -1,0 +1,140 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#f8f5f0;
+}
+
+.container{
+    display:flex;
+    min-height:100vh;
+}
+
+/* Left Side */
+
+.left{
+    flex:1;
+    background:
+    linear-gradient(
+        rgba(0,0,0,.55),
+        rgba(0,0,0,.55)
+    ),
+    url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200");
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+    padding:50px;
+}
+
+.content{
+    max-width:500px;
+}
+
+.content h1{
+    font-size:60px;
+    margin-bottom:20px;
+}
+
+.content p{
+    font-size:18px;
+    line-height:1.8;
+}
+
+/* Right Side */
+
+.right{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+.login-box{
+    width:100%;
+    max-width:450px;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+.login-box h2{
+    text-align:center;
+    margin-bottom:30px;
+    color:#3e2c21;
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:500;
+}
+
+.input-group input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    outline:none;
+}
+
+.input-group input:focus{
+    border-color:#b98d58;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#6b4f3b;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#52392a;
+}
+
+.register-link{
+    margin-top:20px;
+    text-align:center;
+}
+
+.register-link a{
+    text-decoration:none;
+    color:#b98d58;
+    font-weight:600;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+    .left{
+        display:none;
+    }
+
+    .right{
+        flex:100%;
+    }
+
+}
