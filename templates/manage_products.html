@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Manage Products</title>
+</head>
+
+<body>
+
+<h1>Manage Products</h1>
+
+<a href="/add-product">
+    Add New Product
+</a>
+
+<hr>
+
+{% for product in products %}
+
+<div>
+
+    <h2>{{ product[1] }}</h2>
+
+    <p>${{ product[2] }}</p>
+
+    <p>{{ product[3] }}</p>
+
+    <a href="/delete-product/{{ product[0] }}">
+        Delete
+    </a>
+
+</div>
+
+<hr>
+
+{% endfor %}
+
+</body>
+</html>

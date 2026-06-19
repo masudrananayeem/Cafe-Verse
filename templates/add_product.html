@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Product</title>
+</head>
+
+<body>
+
+<h1>Add Product</h1>
+
+<form action="/add-product" method="POST">
+
+    <input
+        type="text"
+        name="tea_name"
+        placeholder="Product Name"
+        required>
+
+    <br><br>
+
+    <input
+        type="number"
+        step="0.01"
+        name="price"
+        placeholder="Price"
+        required>
+
+    <br><br>
+
+    <textarea
+        name="description"
+        placeholder="Description">
+    </textarea>
+
+    <br><br>
+
+    <button type="submit">
+        Add Product
+    </button>
+
+</form>
+
+</body>
+</html>

@@ -78,9 +78,9 @@ def login():
         session['email'] = user[2]  # email
 
         if user[2] == "admin@gmail.com":
-         return redirect('/admin')
+            return redirect('/admin')
 
-    return redirect('/dashboard')
+        return redirect('/dashboard')
 
     return "<h1>Invalid Email or Password</h1>"
 
@@ -158,9 +158,10 @@ def cart():
     user = cursor.fetchone()
 
     cursor.execute("""
-    SELECT teas.tea_name,
-           teas.price,
-           cart.quantity
+   SELECT cart.id,
+       teas.tea_name,
+       teas.price,
+       cart.quantity
     FROM cart
     JOIN teas
     ON cart.tea_id = teas.id
@@ -176,6 +177,114 @@ def cart():
         cart_items=cart_items
     )
 
+# Delete Cart Item
+@app.route('/delete_cart/<int:cart_id>')
+def delete_cart(cart_id):
+
+    conn = sqlite3.connect('tea_house.db')
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "DELETE FROM cart WHERE id=?",
+        (cart_id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect('/cart')
+
+#Admin
+@app.route('/admin')
+def admin():
+
+    if 'role' not in session:
+        return redirect('/admin-login')
+
+    return render_template('admin.html')
+
+@app.route('/admin-login', methods=['POST'])
+def admin_login():
+
+    email = request.form['email']
+    password = request.form['password']
+
+    if email == "admin@gmail.com" and password == "admin123":
+
+        session['role'] = "admin"
+
+        return redirect('/admin')
+
+    return "<h1>Invalid Admin Credentials</h1>"
+
+@app.route('/admin-login')
+def admin_login_page():
+    return render_template('admin-login.html')
+
+#Admin manage product like add delete
+@app.route('/manage-products')
+def manage_products():
+
+    conn = sqlite3.connect('tea_house.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM teas")
+
+    products = cursor.fetchall()
+
+    conn.close()
+
+    return render_template(
+        'manage_products.html',
+        products=products
+    )
+#admin can add product
+@app.route('/add-product')
+def add_product_page():
+    return render_template('add_product.html')
+
+#for adding porduct
+@app.route('/add-product', methods=['POST'])
+def add_product():
+
+    tea_name = request.form['tea_name']
+    price = request.form['price']
+    description = request.form['description']
+
+    conn = sqlite3.connect('tea_house.db')
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        INSERT INTO teas
+        (tea_name,price,description)
+        VALUES(?,?,?)
+        """,
+        (tea_name,price,description)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect('/manage-products')
+
+#for deleting product
+@app.route('/delete-product/<int:id>')
+def delete_product(id):
+
+    conn = sqlite3.connect('tea_house.db')
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "DELETE FROM teas WHERE id=?",
+        (id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect('/manage-products')
+
 # Logout
 @app.route('/logout')
 def logout():
@@ -188,44 +297,3 @@ def logout():
 if __name__ == "__main__":
     app.run(debug=True)
 
-#Admin
-@app.route('/admin')
-def admin():
-
-    if 'email' not in session:
-        return redirect('/login')
-
-    if session['email'] != "admin@gmail.com":
-        return redirect('/dashboard')
-
-    return render_template('admin.html')
-
-@app.route('/admin-login', methods=['POST'])
-def admin_login():
-
-    email = request.form['email']
-    password = request.form['password']
-
-    if email == "admin@gmail.com" and password == "admin123":
-
-        session['email'] = email
-        session['role'] = "admin"
-
-        return redirect('/admin')
-
-    return "<h1>Invalid Admin Credentials</h1>"
-
-@app.route('/admin')
-def admin():
-
-    if 'role' not in session:
-        return redirect('/admin-login')
-
-    if session['role'] != "admin":
-        return redirect('/')
-
-    return render_template('admin.html')
-
-@app.route('/admin-login')
-def admin_login_page():
-    return render_template('admin-login.html')

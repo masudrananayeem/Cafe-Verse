@@ -1,27 +1,192 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 <head>
-    <title>Admin Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CafeVerse Admin Login</title>
+
+```
+<style>
+
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Segoe UI',sans-serif;
+    }
+
+    body{
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+
+        background:
+        linear-gradient(
+        rgba(0,0,0,.65),
+        rgba(0,0,0,.65)
+        ),
+        url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085');
+
+        background-size:cover;
+        background-position:center;
+    }
+
+    .login-box{
+
+        width:420px;
+
+        padding:40px;
+
+        border-radius:20px;
+
+        backdrop-filter:blur(12px);
+
+        background:rgba(255,255,255,.1);
+
+        border:1px solid rgba(255,255,255,.2);
+
+        box-shadow:0 8px 32px rgba(0,0,0,.4);
+
+        animation:fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn{
+
+        from{
+            opacity:0;
+            transform:translateY(-30px);
+        }
+
+        to{
+            opacity:1;
+            transform:translateY(0);
+        }
+    }
+
+    .logo{
+
+        text-align:center;
+        color:white;
+        font-size:40px;
+        margin-bottom:10px;
+    }
+
+    h1{
+        text-align:center;
+        color:white;
+        margin-bottom:30px;
+    }
+
+    .subtitle{
+        text-align:center;
+        color:#ddd;
+        margin-bottom:30px;
+    }
+
+    input{
+
+        width:100%;
+        padding:15px;
+
+        margin-bottom:20px;
+
+        border:none;
+        outline:none;
+
+        border-radius:10px;
+
+        background:rgba(255,255,255,.15);
+
+        color:white;
+
+        font-size:16px;
+    }
+
+    input::placeholder{
+        color:#ddd;
+    }
+
+    input:focus{
+        border:1px solid #d4a373;
+    }
+
+    button{
+
+        width:100%;
+        padding:15px;
+
+        border:none;
+
+        border-radius:10px;
+
+        font-size:18px;
+
+        cursor:pointer;
+
+        color:white;
+
+        background:linear-gradient(
+        135deg,
+        #8b5e34,
+        #d4a373
+        );
+
+        transition:.4s;
+    }
+
+    button:hover{
+
+        transform:translateY(-3px);
+
+        box-shadow:0 10px 20px rgba(212,163,115,.5);
+    }
+
+    .footer{
+
+        margin-top:20px;
+
+        text-align:center;
+
+        color:#ccc;
+
+        font-size:14px;
+    }
+
+</style>
+
 </head>
+
 <body>
 
-    <h1>Admin Login</h1>
+```
+<div class="login-box">
+
+    <div class="logo">
+        ☕
+    </div>
+
+    <h1>CafeVerse Admin</h1>
+
+    <p class="subtitle">
+        Secure Admin Dashboard Access
+    </p>
 
     <form action="/admin-login" method="POST">
 
-        <input type="email"
-               name="email"
-               placeholder="Admin Email"
-               required>
+        <input
+            type="email"
+            name="email"
+            placeholder="Admin Email"
+            required>
 
-        <br><br>
-
-        <input type="password"
-               name="password"
-               placeholder="Password"
-               required>
-
-        <br><br>
+        <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required>
 
         <button type="submit">
             Login
@@ -29,5 +194,13 @@
 
     </form>
 
+    <div class="footer">
+        CafeVerse Management System
+    </div>
+
+</div>
+
+
 </body>
+
 </html>

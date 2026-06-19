@@ -14,6 +14,19 @@ password TEXT NOT NULL
 )
 """)
 
+# Products Table
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS products(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+product_name TEXT NOT NULL,
+category TEXT NOT NULL,
+price REAL NOT NULL,
+description TEXT NOT NULL
+)
+""")
+
+
 # Tea Table
 
 cursor.execute("""
@@ -34,6 +47,19 @@ CREATE TABLE IF NOT EXISTS cart(
     quantity INTEGER DEFAULT 1
 )
 """)
+
+# Orders Table
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS orders(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+user_id INTEGER,
+total_price REAL,
+status TEXT,
+order_date TEXT
+)
+""")
+
 
 conn.commit()
 conn.close()
