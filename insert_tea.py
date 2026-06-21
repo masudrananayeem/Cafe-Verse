@@ -17,6 +17,7 @@ VALUES
 ('Black Tea',6.99,'Premium Black Tea')
 """)
 
+
 cursor.execute("""
 INSERT INTO teas
 (tea_name,price,description)
