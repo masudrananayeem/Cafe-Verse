@@ -1,45 +1,129 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
 
 <head>
-    <title>Add Product</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product | CafeVerse</title>
+
+```
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    body{
+        background:#f5f5f5;
+        font-family:'Poppins',sans-serif;
+    }
+
+    .form-box{
+        max-width:600px;
+        margin:60px auto;
+        background:white;
+        padding:40px;
+        border-radius:20px;
+        box-shadow:0 5px 20px rgba(0,0,0,.1);
+    }
+
+    h1{
+        text-align:center;
+        margin-bottom:30px;
+        color:#3e2c21;
+    }
+
+    .btn-custom{
+        width:100%;
+        background:#3e2c21;
+        color:white;
+        padding:12px;
+        border:none;
+        border-radius:10px;
+    }
+
+    .btn-custom:hover{
+        background:#6f4e37;
+    }
+</style>
+```
+
 </head>
 
 <body>
 
-<h1>Add Product</h1>
+```
+<div class="form-box">
 
-<form action="/add-product" method="POST">
+    <h1>☕ Add New Product</h1>
 
-    <input
-        type="text"
-        name="tea_name"
-        placeholder="Product Name"
-        required>
+    <form action="/add-product"
+          method="POST"
+          enctype="multipart/form-data">
 
-    <br><br>
+        <div class="mb-3">
 
-    <input
-        type="number"
-        step="0.01"
-        name="price"
-        placeholder="Price"
-        required>
+            <label class="form-label">
+                Product Name
+            </label>
 
-    <br><br>
+            <input
+                type="text"
+                class="form-control"
+                name="tea_name"
+                required>
 
-    <textarea
-        name="description"
-        placeholder="Description">
-    </textarea>
+        </div>
 
-    <br><br>
+        <div class="mb-3">
 
-    <button type="submit">
-        Add Product
-    </button>
+            <label class="form-label">
+                Price
+            </label>
 
-</form>
+            <input
+                type="number"
+                step="0.01"
+                class="form-control"
+                name="price"
+                required>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Description
+            </label>
+
+            <textarea
+                class="form-control"
+                rows="4"
+                name="description"></textarea>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Product Image
+            </label>
+
+            <input
+                type="file"
+                class="form-control"
+                name="image"
+                accept="image/*">
+
+        </div>
+
+        <button type="submit" class="btn-custom">
+            Add Product
+        </button>
+
+    </form>
+
+</div>
+
 
 </body>
+
 </html>

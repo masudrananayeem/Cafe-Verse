@@ -1,10 +1,17 @@
 from flask import Flask, render_template, request, redirect, session
 import sqlite3
 
+from werkzeug.utils import secure_filename
+import os
+
 app = Flask(__name__)
 
 # Session Secret Key
 app.secret_key = "tea_house_secret_key"
+
+UPLOAD_FOLDER = 'static/uploads'
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 # Home Page
@@ -238,12 +245,13 @@ def manage_products():
         'manage_products.html',
         products=products
     )
+
+
 #admin can add product
 @app.route('/add-product')
 def add_product_page():
     return render_template('add_product.html')
 
-#for adding porduct
 @app.route('/add-product', methods=['POST'])
 def add_product():
 
@@ -251,16 +259,36 @@ def add_product():
     price = request.form['price']
     description = request.form['description']
 
+    image = request.files['image']
+
+    filename = ""
+
+    if image:
+
+        filename = secure_filename(image.filename)
+
+        image.save(
+            os.path.join(
+                app.config['UPLOAD_FOLDER'],
+                filename
+            )
+        )
+
     conn = sqlite3.connect('tea_house.db')
     cursor = conn.cursor()
 
     cursor.execute(
         """
         INSERT INTO teas
-        (tea_name,price,description)
-        VALUES(?,?,?)
+        (tea_name, price, description, image)
+        VALUES (?, ?, ?, ?)
         """,
-        (tea_name,price,description)
+        (
+            tea_name,
+            price,
+            description,
+            filename
+        )
     )
 
     conn.commit()
@@ -284,6 +312,11 @@ def delete_product(id):
     conn.close()
 
     return redirect('/manage-products')
+
+#for image add to my product 
+
+
+
 
 # Logout
 @app.route('/logout')

@@ -34,9 +34,11 @@ CREATE TABLE IF NOT EXISTS teas(
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 tea_name TEXT NOT NULL,
 price REAL NOT NULL,
-description TEXT NOT NULL
+description TEXT NOT NULL,
+image TEXT
 )
 """)
+
 
 # Cart Table
 cursor.execute("""
