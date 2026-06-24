@@ -201,6 +201,31 @@ def delete_cart(cart_id):
 
     return redirect('/cart')
 
+#User profile
+
+@app.route('/profile')
+def profile():
+
+    if 'user' not in session:
+        return redirect('/login')
+
+    conn = sqlite3.connect('tea_house.db')
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT * FROM users WHERE email=?",
+        (session['email'],)
+    )
+
+    user = cursor.fetchone()
+
+    conn.close()
+
+    return render_template(
+        'profile.html',
+        user=user
+    )
+
 #Admin
 @app.route('/admin')
 def admin():
