@@ -226,6 +226,71 @@ def profile():
         user=user
     )
 
+#Edit profile route
+
+@app.route('/edit-profile')
+def edit_profile():
+
+    conn = sqlite3.connect('tea_house.db')
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT * FROM users WHERE email=?",
+        (session['email'],)
+    )
+
+    user = cursor.fetchone()
+
+    conn.close()
+
+    return render_template(
+        'edit_profile.html',
+        user=user
+    )
+
+@app.route('/edit-profile', methods=['POST'])
+def update_profile():
+
+    name = request.form['name']
+
+    image = request.files['image']
+
+    filename = ""
+
+    if image:
+
+        filename = secure_filename(image.filename)
+
+        image.save(
+            os.path.join(
+                app.config['UPLOAD_FOLDER'],
+                filename
+            )
+        )
+
+    conn = sqlite3.connect('tea_house.db')
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        UPDATE users
+        SET name=?, image=?
+        WHERE email=?
+        """,
+        (
+            name,
+            filename,
+            session['email']
+        )
+    )
+
+    conn.commit()
+    conn.close()
+
+    session['user'] = name
+
+    return redirect('/profile')
+
 #Admin
 @app.route('/admin')
 def admin():
