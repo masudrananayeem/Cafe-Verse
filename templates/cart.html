@@ -86,7 +86,7 @@
 
     h1{
         margin-bottom:30px;
-        color:#3e2c21;
+        color:#ffffff;
     }
 
     .cart-container{
@@ -143,6 +143,28 @@
         background:#b02a37;
     }
 
+    .empty-cart{
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    max-width:500px;
+
+    margin:80px auto;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+.empty-cart h2{
+
+    color:#3e2c21;
+}
+
 </style>
 
 
@@ -150,13 +172,9 @@
 
 <body>
 
-<div class="cart-container">
+    <!-- Sidebar -->
 
-<h1>🛒 My Cart</h1>
-
-{% for item in cart_items %}
-
-<div class="sidebar">
+    <div class="sidebar">
 
         <div class="logo">
             🍵 Cafe Verse
@@ -166,39 +184,66 @@
             <li><a href="/dashboard">🏠 Dashboard</a></li>
             <li><a href="/menu">☕ Tea Menu</a></li>
             <li><a href="/cart">🛒 My Cart</a></li>
-            <li><a href="#">👤 Profile</a></li>
+            <li><a href="/profile">👤 Profile</a></li>
             <li><a href="/logout">🚪 Logout</a></li>
         </ul>
 
     </div>
 
+    <!-- Main Content -->
 
-     
+    <div class="main">
 
-<div class="cart-card">
+        <div class="cart-container">
 
-    <div class="info">
+            <h1>🛒 My Cart</h1>
 
-        <h2>{{ item[1] }}</h2>
+            {% if cart_items %}
 
-        <p>Price: ${{ item[2] }}</p>
+                {% for item in cart_items %}
 
-        <p>Quantity: {{ item[3] }}</p>
+                <div class="cart-card">
+
+                    <div class="info">
+
+                        <h2>{{ item[1] }}</h2>
+
+                        <p>Price: ${{ item[2] }}</p>
+
+                        <p>Quantity: {{ item[3] }}</p>
+
+                    </div>
+
+                    <a href="/delete_cart/{{ item[0] }}"
+                       class="delete-btn">
+
+                        Delete
+
+                    </a>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="empty-cart">
+
+                    <h2>Your Cart is Empty 😔</h2>
+
+                    <br>
+
+                    <a href="/menu" class="delete-btn">
+                        Browse Menu
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
 
     </div>
-
-    <a href="/delete_cart/{{ item[0] }}"
-       class="delete-btn">
-
-       Delete
-
-    </a>
-
-</div>
-
-{% endfor %}
-
-</div>
 
 </body>
 
