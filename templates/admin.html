@@ -1,476 +1,359 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CafeVerse Admin Dashboard</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+    <title>CafeVerse Admin Dashboard</title>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
+    <script src="https://cdn.tailwindcss.com"></script>
 
-body{
-    background:#0f172a;
-    color:white;
-    display:flex;
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-.sidebar{
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    width:260px;
-    height:100vh;
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
 
-    background: rgba(17, 24, 39, 0.85);
+        body {
+            background: #0b0a0f;
+        }
 
-backdrop-filter: blur(12px);
+        .glass {
+            background: rgba(255, 255, 255, .05);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, .08);
+        }
 
-border-right:1px solid rgba(255,255,255,.1);
+        .card-hover {
+            transition: .4s;
+        }
 
-    position:fixed;
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(176, 137, 104, .25);
+        }
 
-    padding:30px 20px;
+        .active-menu {
+            background: linear-gradient(135deg, #6f4e37, #b08968);
+        }
 
-    border-right:1px solid #1f2937;
-}
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
 
-.logo{
-
-    font-size:28px;
-    font-weight:700;
-
-    color:#10b981;
-
-    text-align:center;
-
-    margin-bottom:40px;
-}
-
-.sidebar ul{
-    list-style:none;
-}
-
-.sidebar ul li{
-    margin:15px 0;
-}
-
-.sidebar ul li a{
-
-    text-decoration:none;
-
-    color:#d1d5db;
-
-    display:block;
-
-    padding:14px;
-
-    border-radius:10px;
-
-    transition:.3s;
-}
-
-.sidebar ul li a:hover{
-
-    background:#10b981;
-
-    color:white;
-}
-
-.main{
-
-    margin-left:260px;
-
-    width:100%;
-
-    padding:30px;
-}
-
-.header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:30px;
-}
-
-.admin-profile{
-
-    background:#1e293b;
-
-    padding:10px 20px;
-
-    border-radius:30px;
-}
-
-.hero{
-
-    height:260px;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    margin-bottom:30px;
-
-    background:
-    linear-gradient(
-    rgba(0,0,0,.5),
-    rgba(0,0,0,.5)
-    ),
-    url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085");
-
-    background-size:cover;
-    background-position:center;
-
-    display:flex;
-    align-items:center;
-
-    padding:50px;
-}
-
-.hero h1{
-
-    font-size:48px;
-
-    margin-bottom:10px;
-}
-
-.hero p{
-
-    color:#e5e7eb;
-
-    font-size:18px;
-}
-
-.cards{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-
-    gap:20px;
-
-    margin-bottom:35px;
-}
-
-.card{
-
-    background:#1e293b;
-
-    padding:25px;
-
-    border-radius:18px;
-
-    transition:.3s;
-}
-
-.card:hover{
-
-    transform:translateY(-5px);
-}
-
-.card h3{
-
-    color:#94a3b8;
-
-    margin-bottom:10px;
-}
-
-.card h1{
-
-    color:#10b981;
-
-    font-size:34px;
-}
-
-.section-title{
-
-    margin-bottom:20px;
-}
-
-.products{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:20px;
-
-    margin-bottom:35px;
-}
-
-.product-card{
-
-    background:#1e293b;
-
-    border-radius:15px;
-
-    overflow:hidden;
-}
-
-.product-card img{
-
-    width:100%;
-    height:220px;
-
-    object-fit:cover;
-}
-
-.product-card h3{
-
-    padding:15px;
-}
-
-.table-box{
-
-    background:#1e293b;
-
-    padding:20px;
-
-    border-radius:15px;
-}
-
-table{
-
-    width:100%;
-
-    border-collapse:collapse;
-}
-
-table th{
-
-    background:#10b981;
-
-    color:white;
-
-    padding:15px;
-}
-
-table td{
-
-    padding:15px;
-
-    border-bottom:1px solid #334155;
-}
-
-.completed{
-
-    background:#10b981;
-
-    padding:5px 12px;
-
-    border-radius:20px;
-}
-
-.pending{
-
-    background:#f59e0b;
-
-    padding:5px 12px;
-
-    border-radius:20px;
-}
-
-.btn{
-
-    background:#10b981;
-
-    color:white;
-
-    text-decoration:none;
-
-    padding:12px 18px;
-
-    border-radius:10px;
-}
-
-</style>
+        ::-webkit-scrollbar-thumb {
+            background: #b08968;
+            border-radius: 20px;
+        }
+    </style>
 
 </head>
 
-<body>
+<body class="text-white">
 
-<div class="sidebar">
+    <!-- Sidebar -->
 
-<div class="logo">
-    🍵 CafeVerse
-</div>
+    <aside class="fixed top-0 left-0 w-64 h-screen glass border-r border-white/10 z-50">
 
-<ul>
+        <div class="p-6 border-b border-white/10">
 
-    <li><a href="/admin">📊 Dashboard</a></li>
+            <h1
+                class="text-4xl font-extrabold bg-gradient-to-r from-[#e6ccb2] via-[#ddb892] to-[#b08968] bg-clip-text text-transparent">
 
-    <li>
-    <a href="/manage-products">
-        🍵 Manage Products
-    </a>
-</li>
+                ☕ CafeVerse
 
-    <li><a href="#">📦 Orders</a></li>
+            </h1>
 
-    <li><a href="#">👥 Users</a></li>
+        </div>
 
-    <li><a href="#">📈 Reports</a></li>
+        <nav class="p-4 space-y-3">
 
-    <li><a href="/logout">🚪 Logout</a></li>
+            <a href="/admin"
+                class="active-menu flex items-center gap-3 p-4 rounded-xl text-lg font-medium">
 
-</ul>
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+
+            </a>
+
+            <a href="/manage-products"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300 hover:translate-x-2">
+
+                <i class="fa-solid fa-mug-hot"></i>
+                Products
+
+            </a>
+
+            <a href="/orders"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300 hover:translate-x-2">
+
+                <i class="fa-solid fa-box"></i>
+                Orders
+
+            </a>
+
+            <a href="#"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300 hover:translate-x-2">
+
+                <i class="fa-solid fa-users"></i>
+                Users
+
+            </a>
+
+            <a href="#"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300 hover:translate-x-2">
+
+                <i class="fa-solid fa-chart-pie"></i>
+                Analytics
+
+            </a>
+
+            <a href="#"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300 hover:translate-x-2">
+
+                <i class="fa-solid fa-gear"></i>
+                Settings
+
+            </a>
+
+            <a href="/logout"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-red-500 duration-300">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+
+            </a>
+
+        </nav>
+
+    </aside>
 
 
-</div>
+    <!-- Main Content -->
 
-<div class="main">
+    <div class="ml-64 p-8">
 
-<div class="header">
+        <!-- Top Header -->
 
-    <h2>Admin Dashboard</h2>
+        <div class="flex justify-between items-center mb-8">
 
-    <div class="admin-profile">
-        👨‍💼 Admin
+            <div>
+
+                <h1 class="text-5xl font-bold">
+                    Welcome Back 👋
+                </h1>
+
+                <p class="text-gray-400 mt-2 text-lg">
+                    Manage your CafeVerse business smarter.
+                </p>
+
+            </div>
+
+            <div class="flex items-center gap-4">
+
+                <button class="glass w-14 h-14 rounded-xl">
+                    <i class="fa-solid fa-bell text-xl"></i>
+                </button>
+
+                <button class="glass w-14 h-14 rounded-xl">
+                    <i class="fa-solid fa-gear text-xl"></i>
+                </button>
+
+                <div class="glass flex items-center gap-4 px-4 py-3 rounded-2xl">
+
+                    <!-- নিজের ছবি এখানে দাও -->
+
+                    <img src="/static/uploads/admin.jpg"
+                        class="w-14 h-14 rounded-full object-cover border-2 border-[#b08968]">
+
+                    <div>
+
+                        <h3 class="font-semibold text-lg">
+                            Masud Rana Nayeem
+                        </h3>
+
+                        <p class="text-gray-400 text-sm">
+                            Founder & Administrator
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Hero Banner -->
+
+        <section class="relative h-[360px] rounded-3xl overflow-hidden mb-8">
+
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1400"
+                class="absolute w-full h-full object-cover">
+
+            <div class="absolute inset-0 bg-black/60"></div>
+
+            <div class="relative z-10 p-14">
+
+                <h1 class="text-6xl font-bold mb-6">
+                    CafeVerse Analytics
+                </h1>
+
+                <p class="text-xl text-gray-200 mb-8">
+                    Monitor sales, manage products and grow your coffee business.
+                </p>
+
+                <button
+                    class="bg-gradient-to-r from-[#6f4e37] to-[#b08968] px-8 py-4 rounded-xl text-lg hover:scale-105 duration-300">
+
+                    View Reports
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Stats -->
+
+        <div class="grid grid-cols-4 gap-6 mb-8">
+
+            <div class="glass rounded-2xl p-6 card-hover">
+
+                <h3 class="text-gray-400">
+                    Total Products
+                </h3>
+
+                <h1 class="text-4xl font-bold mt-3">
+                    25
+                </h1>
+
+            </div>
+
+            <div class="glass rounded-2xl p-6 card-hover">
+
+                <h3 class="text-gray-400">
+                    Total Users
+                </h3>
+
+                <h1 class="text-4xl font-bold mt-3">
+                    120
+                </h1>
+
+            </div>
+
+            <div class="glass rounded-2xl p-6 card-hover">
+
+                <h3 class="text-gray-400">
+                    Total Orders
+                </h3>
+
+                <h1 class="text-4xl font-bold mt-3">
+                    350
+                </h1>
+
+            </div>
+
+            <div class="glass rounded-2xl p-6 card-hover">
+
+                <h3 class="text-gray-400">
+                    Revenue
+                </h3>
+
+                <h1 class="text-4xl font-bold mt-3">
+                    $5,250
+                </h1>
+
+            </div>
+
+        </div>
+
+
+        <!-- Recent Orders -->
+
+        <div class="glass rounded-3xl p-8">
+
+            <h2 class="text-3xl font-bold mb-8">
+                Recent Orders
+            </h2>
+
+            <table class="w-full">
+
+                <thead>
+
+                    <tr class="border-b border-white/10 text-left">
+
+                        <th class="pb-5">Order ID</th>
+                        <th>Customer</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr class="border-b border-white/10">
+
+                        <td class="py-6">#1001</td>
+                        <td>Masud</td>
+                        <td>$25</td>
+
+                        <td>
+                            <span class="bg-green-500 px-4 py-2 rounded-full">
+                                Completed
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr class="border-b border-white/10">
+
+                        <td class="py-6">#1002</td>
+                        <td>Shuvo</td>
+                        <td>$15</td>
+
+                        <td>
+                            <span class="bg-yellow-500 px-4 py-2 rounded-full">
+                                Pending
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td class="py-6">#1003</td>
+                        <td>Sadman</td>
+                        <td>$35</td>
+
+                        <td>
+                            <span class="bg-blue-500 px-4 py-2 rounded-full">
+                                Processing
+                            </span>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
     </div>
-
-</div>
-
-<div class="hero">
-
-    <div>
-
-        <h1>Welcome Back ☕</h1>
-
-        <p>
-            Manage your CafeVerse business efficiently.
-        </p>
-
-    </div>
-
-</div>
-
-<div class="cards">
-
-    <div class="card">
-        <h3>Total Products</h3>
-        <h1>25</h1>
-    </div>
-
-    <div class="card">
-        <h3>Total Users</h3>
-        <h1>120</h1>
-    </div>
-
-    <div class="card">
-        <h3>Total Orders</h3>
-        <h1>350</h1>
-    </div>
-
-    <div class="card">
-        <h3>Revenue</h3>
-        <h1>$5,250</h1>
-    </div>
-
-</div>
-
-<h2 class="section-title">Popular Products</h2>
-
-<div class="products">
-
-    <div class="product-card">
-
-        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348">
-
-        <h3>Latte Coffee</h3>
-
-    </div>
-
-    <div class="product-card">
-
-        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
-
-        <h3>Cappuccino</h3>
-
-    </div>
-
-    <div class="product-card">
-
-        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085">
-
-        <h3>Cold Brew</h3>
-
-    </div>
-
-</div>
-
-<div class="table-box">
-
-    <h2 class="section-title">
-        Recent Orders
-    </h2>
-
-    <table>
-
-        <tr>
-
-            <th>Order ID</th>
-            <th>Customer</th>
-            <th>Amount</th>
-            <th>Status</th>
-
-        </tr>
-
-        <tr>
-
-            <td>#1001</td>
-            <td>Masud</td>
-            <td>$15</td>
-            <td>
-                <span class="completed">
-                    Completed
-                </span>
-            </td>
-
-        </tr>
-
-        <tr>
-
-            <td>#1002</td>
-            <td>Shuvo</td>
-            <td>$22</td>
-            <td>
-                <span class="pending">
-                    Pending
-                </span>
-            </td>
-
-        </tr>
-
-        <tr>
-
-            <td>#1003</td>
-            <td>Sadman</td>
-            <td>$18</td>
-            <td>
-                <span class="completed">
-                    Completed
-                </span>
-            </td>
-
-        </tr>
-
-    </table>
-
-</div>
-
-</div>
 
 </body>
+
 </html>
