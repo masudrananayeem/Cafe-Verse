@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,268 +10,267 @@
 
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet">
+        rel="stylesheet">
 
     <style>
-        *{
-            font-family:'Poppins',sans-serif;
-            scroll-behavior:smooth;
+        * {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
         }
     </style>
-    <link rel="stylesheet"
-href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 </head>
 
 <body class="bg-[#F5EFE6] ">
 
-<!-- Navbar -->
+    <!-- Navbar -->
 
-<nav class="fixed top-0 left-0 w-full z-50 bg-black/40 backdrop-blur-md">
+    <nav class="fixed top-0 left-0 w-full z-50 bg-black/40 backdrop-blur-md">
 
-    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
 
-        <h1 class="text-3xl font-bold text-white">
-            ☕ CafeVerse
-        </h1>
+            <a href="/" class="flex items-center group">
 
-        <ul class="hidden md:flex gap-8 text-white items-center">
+    <img src="{{ url_for('static', filename='images/logo.png') }}"
+         alt="CafeVerse Logo"
+         class="h-11 md:h-13 lg:h-15  w-auto object-contain
+                scale-125
+                transition duration-300
+                group-hover:scale-150">
 
-            <li><a href="#" class="hover:text-amber-300 duration-300">Home</a></li>
+</a>
+            <ul class="hidden md:flex gap-8 text-white items-center">
 
-            <li><a href="#menu" class="hover:text-amber-300 duration-300">Menu</a></li>
+                <li><a href="#" class="hover:text-amber-300 duration-300">Home</a></li>
 
-            <li><a href="#reviews" class="hover:text-amber-300 duration-300">Reviews</a></li>
+                <li><a href="#menu" class="hover:text-amber-300 duration-300">Menu</a></li>
 
-            <li>
-                <a href="/admin-login"
-                class="bg-amber-700 px-5 py-2 rounded-full hover:bg-amber-800 duration-300">
+                <li><a href="#reviews" class="hover:text-amber-300 duration-300">Reviews</a></li>
 
-                    Admin Login
+                <li>
+                    <a href="/admin-login" class="bg-amber-700 px-5 py-2 rounded-full hover:bg-amber-800 duration-300">
+
+                        Admin Login
+
+                    </a>
+                </li>
+
+                <li>
+
+                    <a href="/login"
+                        class="border border-white px-5 py-2 rounded-full hover:bg-white hover:text-black duration-300">
+
+                        Login
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+            <button id="menuBtn" class="md:hidden text-white text-3xl">
+
+                ☰
+
+            </button>
+
+
+
+        </div>
+
+        <!-- Mobile Menu -->
+
+        <div id="mobileMenu" class="hidden md:hidden bg-black/90 text-white">
+
+            <a href="#" class="block px-6 py-4 border-b">Home</a>
+
+            <a href="#menu" class="block px-6 py-4 border-b">Menu</a>
+
+            <a href="#reviews" class="block px-6 py-4 border-b">Reviews</a>
+
+            <a href="/admin-login" class="block px-6 py-4 border-b">
+                Admin Login
+            </a>
+
+            <a href="/login" class="block px-6 py-4">
+                Login
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Hero Section -->
+
+    <section class="min-h-screen flex items-center bg-cover bg-center" style="background-image:
+linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+url('/static/images/dashboard-1.jpg');">
+
+        <div class="max-w-7xl mx-auto px-6 text-white">
+
+            <span class="bg-white/20 backdrop-blur-md px-5 py-2 rounded-full">
+
+                Premium Coffee Since 2010
+
+            </span>
+
+            <h1 class="text-5xl md:text-7xl font-extrabold mt-8 leading-tight">
+
+                Fresh Coffee <br>
+
+                For Every Mood
+
+            </h1>
+
+            <p class="mt-8 max-w-xl text-lg text-gray-200">
+
+                Discover handcrafted premium coffee and tea
+                prepared with passion and tradition.
+
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row gap-5">
+
+                <a href="/menu" class="bg-amber-700 px-8 py-4 rounded-xl text-center hover:scale-105 duration-300">
+
+                    Explore Menu
 
                 </a>
-            </li>
-
-            <li>
 
                 <a href="/login"
-                class="border border-white px-5 py-2 rounded-full hover:bg-white hover:text-black duration-300">
+                    class="border border-white px-8 py-4 rounded-xl text-center hover:bg-white hover:text-black duration-300">
 
                     Login
 
                 </a>
 
-            </li>
-
-        </ul>
-
-        <button id="menuBtn"
-        class="md:hidden text-white text-3xl">
-
-            ☰
-
-        </button>
-
-
-
-    </div>
-
-    <!-- Mobile Menu -->
-
-    <div id="mobileMenu"
-    class="hidden md:hidden bg-black/90 text-white">
-
-        <a href="#" class="block px-6 py-4 border-b">Home</a>
-
-        <a href="#menu" class="block px-6 py-4 border-b">Menu</a>
-
-        <a href="#reviews" class="block px-6 py-4 border-b">Reviews</a>
-
-        <a href="/admin-login" class="block px-6 py-4 border-b">
-            Admin Login
-        </a>
-
-        <a href="/login" class="block px-6 py-4">
-            Login
-        </a>
-
-    </div>
-
-</nav>
-
-
-<!-- Hero Section -->
-
-<section class="min-h-screen flex items-center bg-cover bg-center"
-
-style="background-image:
-linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
-url('/static/images/dashboard-1.jpg');">
-
-    <div class="max-w-7xl mx-auto px-6 text-white">
-
-        <span class="bg-white/20 backdrop-blur-md px-5 py-2 rounded-full">
-
-            Premium Coffee Since 2010
-
-        </span>
-
-        <h1 class="text-5xl md:text-7xl font-extrabold mt-8 leading-tight">
-
-            Fresh Coffee <br>
-
-            For Every Mood
-
-        </h1>
-
-        <p class="mt-8 max-w-xl text-lg text-gray-200">
-
-            Discover handcrafted premium coffee and tea
-            prepared with passion and tradition.
-
-        </p>
-
-        <div class="mt-10 flex flex-col sm:flex-row gap-5">
-
-            <a href="/menu"
-
-            class="bg-amber-700 px-8 py-4 rounded-xl text-center hover:scale-105 duration-300">
-
-                Explore Menu
-
-            </a>
-
-            <a href="/login"
-
-            class="border border-white px-8 py-4 rounded-xl text-center hover:bg-white hover:text-black duration-300">
-
-                Login
-
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- Features -->
-
-<section class="py-20">
-
-    <div class="max-w-7xl mx-auto px-6">
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-            <div class="bg-white p-10 rounded-3xl shadow-lg hover:-translate-y-3 duration-300">
-
-                <h3 class="text-3xl mb-4">🌱 Organic Beans</h3>
-
-                <p class="text-gray-600">
-                    Carefully selected premium organic coffee beans.
-                </p>
-
-            </div>
-
-            <div class="bg-white p-10 rounded-3xl shadow-lg hover:-translate-y-3 duration-300">
-
-                <h3 class="text-3xl mb-4">🚚 Fast Delivery</h3>
-
-                <p class="text-gray-600">
-                    Hot and fresh coffee delivered quickly.
-                </p>
-
-            </div>
-
-            <div class="bg-white p-10 rounded-3xl shadow-lg hover:-translate-y-3 duration-300">
-
-                <h3 class="text-3xl mb-4">☕ Premium Taste</h3>
-
-                <p class="text-gray-600">
-                    Rich flavors crafted by expert baristas.
-                </p>
-
             </div>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- Popular Menu -->
+    <!-- Features -->
 
-<section id="menu" class="py-20 bg-[#dbc1ac]">
+    <section class="py-20">
 
-    <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
 
-        <h2 class="text-5xl font-bold text-center mb-16 text-[#38220f]">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            Popular Collection
+                <div class="bg-white p-10 rounded-3xl shadow-lg hover:-translate-y-3 duration-300">
 
-        </h2>
+                    <h3 class="text-3xl mb-4">🌱 Organic Beans</h3>
 
-        <div data-aos="fade-up" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-
-            <div class="bg-white rounded-3xl overflow-hidden shadow-xl hover:-translate-y-4 duration-300">
-
-                <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=700"
-                     class="h-72 w-full object-cover">
-
-                <div class="p-8">
-
-                    <h3 class="text-3xl font-bold">Cappuccino</h3>
-
-                    <p class="my-4 text-gray-600">
-                        Creamy espresso with silky milk foam.
+                    <p class="text-gray-600">
+                        Carefully selected premium organic coffee beans.
                     </p>
 
-                    <span class="text-2xl font-bold text-amber-800">
-                        $5.99
-                    </span>
-
                 </div>
 
-            </div>
+                <div class="bg-white p-10 rounded-3xl shadow-lg hover:-translate-y-3 duration-300">
 
-            <div class="bg-white rounded-3xl overflow-hidden shadow-xl hover:-translate-y-4 duration-300">
+                    <h3 class="text-3xl mb-4">🚚 Fast Delivery</h3>
 
-                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=700"
-                     class="h-72 w-full object-cover">
-
-                <div class="p-8">
-
-                    <h3 class="text-3xl font-bold">Latte</h3>
-
-                    <p class="my-4 text-gray-600">
-                        Smooth espresso blended with steamed milk.
+                    <p class="text-gray-600">
+                        Hot and fresh coffee delivered quickly.
                     </p>
 
-                    <span class="text-2xl font-bold text-amber-800">
-                        $6.99
-                    </span>
-
                 </div>
 
-            </div>
+                <div class="bg-white p-10 rounded-3xl shadow-lg hover:-translate-y-3 duration-300">
 
-            <div class="bg-white rounded-3xl overflow-hidden shadow-xl hover:-translate-y-4 duration-300">
+                    <h3 class="text-3xl mb-4">☕ Premium Taste</h3>
 
-                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700"
-                     class="h-72 w-full object-cover">
-
-                <div class="p-8">
-
-                    <h3 class="text-3xl font-bold">Milk Coffee</h3>
-
-                    <p class="my-4 text-gray-600">
-                        Rich and creamy premium milk coffee.
+                    <p class="text-gray-600">
+                        Rich flavors crafted by expert baristas.
                     </p>
 
-                    <span class="text-2xl font-bold text-amber-800">
-                        $4.99
-                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Popular Menu -->
+
+    <section id="menu" class="py-20 bg-[#dbc1ac]">
+
+        <div class="max-w-7xl mx-auto px-6">
+
+            <h2 class="text-5xl font-bold text-center mb-16 text-[#38220f]">
+
+                Popular Collection
+
+            </h2>
+
+            <div data-aos="fade-up" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl hover:-translate-y-4 duration-300">
+
+                    <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=700"
+                        class="h-72 w-full object-cover">
+
+                    <div class="p-8">
+
+                        <h3 class="text-3xl font-bold">Cappuccino</h3>
+
+                        <p class="my-4 text-gray-600">
+                            Creamy espresso with silky milk foam.
+                        </p>
+
+                        <span class="text-2xl font-bold text-amber-800">
+                            $5.99
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl hover:-translate-y-4 duration-300">
+
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=700"
+                        class="h-72 w-full object-cover">
+
+                    <div class="p-8">
+
+                        <h3 class="text-3xl font-bold">Latte</h3>
+
+                        <p class="my-4 text-gray-600">
+                            Smooth espresso blended with steamed milk.
+                        </p>
+
+                        <span class="text-2xl font-bold text-amber-800">
+                            $6.99
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl hover:-translate-y-4 duration-300">
+
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700"
+                        class="h-72 w-full object-cover">
+
+                    <div class="p-8">
+
+                        <h3 class="text-3xl font-bold">Milk Coffee</h3>
+
+                        <p class="my-4 text-gray-600">
+                            Rich and creamy premium milk coffee.
+                        </p>
+
+                        <span class="text-2xl font-bold text-amber-800">
+                            $4.99
+                        </span>
+
+                    </div>
 
                 </div>
 
@@ -278,138 +278,137 @@ url('/static/images/dashboard-1.jpg');">
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- Statistics -->
+    <!-- Statistics -->
 
-<section class="py-20">
+    <section class="py-20">
 
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 " data-aos="zoom-in">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 " data-aos="zoom-in">
 
-        <div class="text-center">
-            <h1 class="text-5xl font-bold text-[#38220f]">10K+</h1>
-            <p>Happy Customers</p>
-        </div>
-
-        <div class="text-center">
-            <h1 class="text-5xl font-bold text-[#38220f]">50+</h1>
-            <p>Drinks</p>
-        </div>
-
-        <div class="text-center">
-            <h1 class="text-5xl font-bold text-[#38220f]">15+</h1>
-            <p>Years Experience</p>
-        </div>
-
-        <div class="text-center">
-            <h1 class="text-5xl font-bold text-[#38220f]">100%</h1>
-            <p>Organic Quality</p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- Footer -->
-
-<footer class="bg-[#1A120B] text-white">
-
-    <div class="max-w-7xl mx-auto px-6 py-14">
-
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-
-            <div>
-
-                <h2 class="text-3xl font-bold mb-4">
-                    ☕ CafeVerse
-                </h2>
-
-                <p class="text-gray-400">
-                    Premium handcrafted coffee experience.
-                </p>
-
+            <div class="text-center">
+                <h1 class="text-5xl font-bold text-[#38220f]">10K+</h1>
+                <p>Happy Customers</p>
             </div>
 
-            <div>
-
-                <h3 class="text-xl font-bold mb-4">Quick Links</h3>
-
-                <ul class="space-y-2">
-
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#menu">Menu</a></li>
-                    <li><a href="#reviews">Reviews</a></li>
-
-                </ul>
-
+            <div class="text-center">
+                <h1 class="text-5xl font-bold text-[#38220f]">50+</h1>
+                <p>Drinks</p>
             </div>
 
-            <div>
-
-                <h3 class="text-xl font-bold mb-4">Contact</h3>
-
-                <p>📍 Dhaka, Bangladesh</p>
-
-                <p>📧 info@cafeverse.com</p>
-
-                <p>📞 +880123456789</p>
-
+            <div class="text-center">
+                <h1 class="text-5xl font-bold text-[#38220f]">15+</h1>
+                <p>Years Experience</p>
             </div>
 
-            <div>
+            <div class="text-center">
+                <h1 class="text-5xl font-bold text-[#38220f]">100%</h1>
+                <p>Organic Quality</p>
+            </div>
 
-                <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+        </div>
 
-                <div class="flex gap-4 text-3xl">
+    </section>
 
-                    <span>📘</span>
-                    <span>📷</span>
-                    <span>🐦</span>
+
+    <!-- Footer -->
+
+    <footer class="bg-[#1A120B] text-white">
+
+        <div class="max-w-7xl mx-auto px-6 py-14">
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+
+                <div>
+
+                    <h2 class="text-3xl font-bold mb-4">
+                        ☕ CafeVerse
+                    </h2>
+
+                    <p class="text-gray-400">
+                        Premium handcrafted coffee experience.
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+
+                    <ul class="space-y-2">
+
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+
+                    </ul>
+
+                </div>
+
+                <div>
+
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+
+                    <p>📍 Dhaka, Bangladesh</p>
+
+                    <p>📧 info@cafeverse.com</p>
+
+                    <p>📞 +880123456789</p>
+
+                </div>
+
+                <div>
+
+                    <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+
+                    <div class="flex gap-4 text-3xl">
+
+                        <span>📘</span>
+                        <span>📷</span>
+                        <span>🐦</span>
+
+                    </div>
 
                 </div>
 
             </div>
 
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center">
+
+                © 2026 CafeVerse | Designed by Masud Rana Nayeem
+
+            </div>
+
         </div>
 
-        <div class="border-t border-gray-700 mt-10 pt-6 text-center">
-
-            © 2026 CafeVerse | Designed by Masud Rana Nayeem
-
-        </div>
-
-    </div>
-
-</footer>
+    </footer>
 
 
-<script>
+    <script>
 
-const menuBtn=document.getElementById('menuBtn');
-const mobileMenu=document.getElementById('mobileMenu');
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
 
-menuBtn.addEventListener('click',()=>{
+        menuBtn.addEventListener('click', () => {
 
-mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('hidden');
 
-});
+        });
 
-</script>
+    </script>
 
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-<script>
-AOS.init({
-    duration:1000,
-    once:true
-});
-</script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
 
 
 </body>
+
 </html>
