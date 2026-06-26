@@ -21,7 +21,11 @@
         }
 
         body {
-            background: #0b0a0f;
+             background: #0b0a0f;
+    background-image: url("{{ url_for('static', filename='images/back9.jpg') }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
             color: white;
         }
 
@@ -64,12 +68,9 @@
 
         <div class="p-6 border-b border-white/10">
 
-            <h1
-                class="text-4xl font-extrabold bg-gradient-to-r from-[#e6ccb2] via-[#ddb892] to-[#b08968] bg-clip-text text-transparent">
-
-                ☕ CafeVerse
-
-            </h1>
+             <img src="{{ url_for('static', filename='images/logo.png') }}"
+     alt="CafeVerse Logo"
+     class="h-16 w-auto object-contain">
 
         </div>
 
