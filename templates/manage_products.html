@@ -2,83 +2,55 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Manage Products | CafeVerse</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <style>
-       body{
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
 
-    background:#f5f5f5;
-
-    font-family:'Poppins',sans-serif;
-
-    
-}
-
-
-
-        .top-section {
-            background: linear-gradient(135deg, #3e2c21, #6f4e37);
+        body {
+            background: #0b0a0f;
             color: white;
-            padding: 40px;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, .05);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .card-hover {
+            transition: .4s;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(176, 137, 104, .25);
+        }
+
+        .active-menu {
+            background: linear-gradient(135deg, #6f4e37, #b08968);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #b08968;
             border-radius: 20px;
-            margin-bottom: 40px;
-        }
-
-        .top-section h1 {
-            font-weight: 700;
-        }
-
-        .add-btn {
-            background: #fff;
-            color: #3e2c21;
-            font-weight: 600;
-            border-radius: 10px;
-            padding: 12px 20px;
-            text-decoration: none;
-            transition: .3s;
-        }
-
-        .add-btn:hover {
-            background: #f0f0f0;
-            transform: translateY(-3px);
-        }
-
-        .product-card {
-            border: none;
-            border-radius: 20px;
-            overflow: hidden;
-            transition: .3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,.08);
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0,0,0,.15);
-        }
-
-        .product-card img {
-            height: 220px;
-            object-fit: cover;
-        }
-
-        .price {
-            color: #6f4e37;
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .delete-btn {
-            width: 100%;
-            border-radius: 10px;
         }
     </style>
 
@@ -86,55 +58,149 @@
 
 <body>
 
+    <!-- Sidebar -->
 
+    <aside class="fixed top-0 left-0 w-64 h-screen glass border-r border-white/10 z-50">
 
-<div class="container py-5">
+        <div class="p-6 border-b border-white/10">
 
-    <div class="top-section d-flex justify-content-between align-items-center">
+            <h1
+                class="text-4xl font-extrabold bg-gradient-to-r from-[#e6ccb2] via-[#ddb892] to-[#b08968] bg-clip-text text-transparent">
 
-        <div>
-            <h1><i class="bi bi-cup-hot-fill"></i> Manage Products</h1>
-            <p>Manage all coffee and tea items from here.</p>
+                ☕ CafeVerse
+
+            </h1>
+
         </div>
 
-        <a href="/add-product" class="add-btn">
-            <i class="bi bi-plus-circle"></i> Add New Product
-        </a>
+        <nav class="p-4 space-y-3">
 
-    </div>
+            <a href="/admin"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300">
 
-    <div class="row g-4">
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
 
-        {% for product in products %}
+            </a>
 
-        <div class="col-lg-4 col-md-6">
+            <a href="/manage-products"
+                class="active-menu flex items-center gap-3 p-4 rounded-xl">
 
-            <div class="card product-card">
+                <i class="fa-solid fa-mug-hot"></i>
+                Products
+
+            </a>
+
+            <a href="/orders"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300">
+
+                <i class="fa-solid fa-box"></i>
+                Orders
+
+            </a>
+
+            <a href="#"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300">
+
+                <i class="fa-solid fa-users"></i>
+                Users
+
+            </a>
+
+            <a href="#"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300">
+
+                <i class="fa-solid fa-chart-pie"></i>
+                Analytics
+
+            </a>
+
+            <a href="#"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300">
+
+                <i class="fa-solid fa-gear"></i>
+                Settings
+
+            </a>
+
+            <a href="/logout"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-red-500 duration-300">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- Main Content -->
+
+    <div class="ml-64 p-8">
+
+        <!-- Header -->
+
+        <div class="flex justify-between items-center mb-8">
+
+            <div>
+                <h1 class="text-5xl font-bold">
+                    Manage Products ☕
+                </h1>
+
+                <p class="text-gray-400 mt-2 text-lg">
+                    Manage all coffee and tea items from here.
+                </p>
+            </div>
+
+            <a href="/add-product"
+                class="bg-gradient-to-r from-[#6f4e37] to-[#b08968]
+                px-6 py-4 rounded-xl text-lg
+                hover:scale-105 duration-300">
+
+                <i class="fa-solid fa-plus"></i>
+                Add Product
+
+            </a>
+
+        </div>
+
+
+        <!-- Product Grid -->
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            {% for product in products %}
+
+            <div class="glass rounded-3xl overflow-hidden card-hover">
 
                 <img src="/static/uploads/{{ product[4] }}"
-     class="card-img-top">
+                    class="w-full h-60 object-cover">
 
-                <div class="card-body">
+                <div class="p-6">
 
-                    <h3 class="card-title">
+                    <h2 class="text-2xl font-bold mb-2">
                         {{ product[1] }}
+                    </h2>
+
+                    <h3 class="text-3xl font-bold text-[#ddb892] mb-4">
+                        ${{ product[2] }}
                     </h3>
 
-                    <h4 class="price">
-                        ${{ product[2] }}
-                    </h4>
-
-                    <p class="card-text text-muted">
+                    <p class="text-gray-400 mb-6">
                         {{ product[3] }}
                     </p>
 
-                    <div class="d-grid gap-2">
+                    <div class="flex gap-3">
 
                         <a href="/delete-product/{{ product[0] }}"
-                           class="btn btn-danger delete-btn">
+                            class="w-full text-center bg-red-500
+                            hover:bg-red-600
+                            py-3 rounded-xl duration-300">
 
-                            <i class="bi bi-trash-fill"></i>
-                            Delete Product
+                            <i class="fa-solid fa-trash"></i>
+                            Delete
 
                         </a>
 
@@ -144,15 +210,12 @@
 
             </div>
 
-        </div>
+            {% endfor %}
 
-        {% endfor %}
+        </div>
 
     </div>
 
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
+
 </html>
