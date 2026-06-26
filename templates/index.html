@@ -7,6 +7,12 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <script>
+tailwind.config = {
+darkMode:'class'
+}
+</script>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet">
 
@@ -16,9 +22,11 @@
             scroll-behavior:smooth;
         }
     </style>
+    <link rel="stylesheet"
+href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
 </head>
 
-<body class="bg-[#F5EFE6]">
+<body class="bg-[#F5EFE6] dark:bg-black">
 
 <!-- Navbar -->
 
@@ -60,12 +68,21 @@
 
         </ul>
 
+        <button id="themeToggle"
+class="bg-white/20 px-4 py-2 rounded-full text-white">
+
+🌙
+
+</button>
+
         <button id="menuBtn"
         class="md:hidden text-white text-3xl">
 
             ☰
 
         </button>
+
+
 
     </div>
 
@@ -206,7 +223,7 @@ url('/static/images/dashboard-1.jpg');">
 
         </h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div data-aos="fade-up" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
 
             <div class="bg-white rounded-3xl overflow-hidden shadow-xl hover:-translate-y-4 duration-300">
 
@@ -282,7 +299,7 @@ url('/static/images/dashboard-1.jpg');">
 
 <section class="py-20">
 
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 " data-aos="zoom-in">
 
         <div class="text-center">
             <h1 class="text-5xl font-bold text-[#38220f]">10K+</h1>
@@ -390,6 +407,28 @@ const mobileMenu=document.getElementById('mobileMenu');
 menuBtn.addEventListener('click',()=>{
 
 mobileMenu.classList.toggle('hidden');
+
+});
+
+</script>
+
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+AOS.init({
+    duration:1000,
+    once:true
+});
+</script>
+
+<script>
+
+const btn = document.getElementById('themeToggle');
+
+btn.addEventListener('click',()=>{
+
+document.body.classList.toggle('dark');
 
 });
 
