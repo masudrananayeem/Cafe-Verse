@@ -322,6 +322,9 @@ def admin_login_page():
 @app.route('/manage-products')
 def manage_products():
 
+    if 'role' not in session:
+        return redirect('/admin-login')
+
     conn = sqlite3.connect('tea_house.db')
     cursor = conn.cursor()
 
@@ -335,7 +338,6 @@ def manage_products():
         'manage_products.html',
         products=products
     )
-
 
 #admin can add product
 @app.route('/add-product')
@@ -404,15 +406,22 @@ def delete_product(id):
     return redirect('/manage-products')
 
 #for image add to my product 
+#admin checks orders
+@app.route('/orders')
+def orders():
 
+    if 'role' not in session:
+        return redirect('/admin-login')
 
-
+    return render_template('orders.html')
 
 # Logout
 @app.route('/logout')
 def logout():
 
     session.pop('user', None)
+    session.pop('email', None)
+    session.pop('role', None)
 
     return redirect('/')
 
