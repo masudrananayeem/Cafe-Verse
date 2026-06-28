@@ -156,93 +156,136 @@ url('/static/images/dashboard-1.jpg');">
 
     <!-- Features -->
 
-    <section class="py-20">
+<section class="relative py-24 overflow-hidden">
 
-        <div class="max-w-7xl mx-auto px-6">
+```
+<!-- Background Video -->
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<video autoplay muted loop playsinline
+    class="absolute inset-0 w-full h-full object-cover">
 
-                <div class="bg-white/70 backdrop-blur-lg
-                p-10 rounded-3xl shadow-2xl
-                border border-white/40
-                hover:scale-105 hover:-translate-y-4
-                duration-500">
+    <source src="/static/videos/coffee-bg.mp4"
+        type="video/mp4">
 
-                    <h3 class="text-3xl mb-4">🌱 Organic Beans</h3>
+</video>
 
-                    <p class="text-gray-600">
-                        Carefully selected premium organic coffee beans.
-                    </p>
+<!-- Overlay -->
 
-                </div>
+<div class="absolute inset-0
+bg-gradient-to-b
+from-black/80
+via-black/60
+to-black/80">
+</div>
 
-                <div class="bg-white/70 backdrop-blur-lg
-                p-10 rounded-3xl shadow-2xl
-                border border-white/40
-                hover:scale-105 hover:-translate-y-4
-                duration-500">
+<!-- Content -->
 
-                    <h3 class="text-3xl mb-4">🚚 Fast Delivery</h3>
+<div class="relative z-10">
 
-                    <p class="text-gray-600">
-                        Hot and fresh coffee delivered quickly.
-                    </p>
+    <!-- Features -->
 
-                </div>
+    <div class="max-w-7xl mx-auto px-6">
 
-                <div class="bg-white/70 backdrop-blur-lg
-                p-10 rounded-3xl shadow-2xl
-                border border-white/40
-                hover:scale-105 hover:-translate-y-4
-                duration-500">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
 
-                    <h3 class="text-3xl mb-4">☕ Premium Taste</h3>
+            <div class="bg-white/10 backdrop-blur-xl
+            p-10 rounded-3xl shadow-2xl
+            border border-white/20
+            hover:scale-105 hover:-translate-y-4
+            duration-500 text-white">
 
-                    <p class="text-gray-600">
-                        Rich flavors crafted by expert baristas.
-                    </p>
+                <h3 class="text-3xl mb-4">
+                    🌱 Organic Beans
+                </h3>
 
-                </div>
+                <p class="text-gray-200">
+                    Carefully selected premium organic coffee beans.
+                </p>
+
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-xl
+            p-10 rounded-3xl shadow-2xl
+            border border-white/20
+            hover:scale-105 hover:-translate-y-4
+            duration-500 text-white">
+
+                <h3 class="text-3xl mb-4">
+                    🚚 Fast Delivery
+                </h3>
+
+                <p class="text-gray-200">
+                    Hot and fresh coffee delivered quickly.
+                </p>
+
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-xl
+            p-10 rounded-3xl shadow-2xl
+            border border-white/20
+            hover:scale-105 hover:-translate-y-4
+            duration-500 text-white">
+
+                <h3 class="text-3xl mb-4">
+                    ☕ Premium Taste
+                </h3>
+
+                <p class="text-gray-200">
+                    Rich flavors crafted by expert baristas.
+                </p>
 
             </div>
 
         </div>
 
-    </section>
+    </div>
 
-<section class="py-24">
+    <!-- About Section -->
 
-<div class="max-w-7xl mx-auto px-6
-grid md:grid-cols-2 gap-16 items-center">
+    <div class="max-w-7xl mx-auto px-6
+    grid md:grid-cols-2 gap-16 items-center">
 
-    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000"
-    class="rounded-[40px] shadow-2xl">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000"
+            class="rounded-[40px] shadow-2xl">
 
-    <div>
+        <div>
 
-        <h2 class="text-5xl font-bold mb-8 text-[#38220f]">
-            About CafeVerse
-        </h2>
+            <h2 class="text-5xl font-bold mb-8
+bg-gradient-to-r
+from-[#f5e6d3]
+via-[#ddb892]
+to-[#c19a6b]
+bg-clip-text text-transparent">
 
-        <p class="text-gray-700 text-lg leading-9">
+                About CafeVerse
 
-            CafeVerse is a luxury coffee destination where tradition meets modern craftsmanship. Every cup is carefully brewed using premium beans sourced from around the world.
+            </h2>
 
-        </p>
+            <p class="text-gray-200 text-lg leading-9">
 
-        <button class="mt-8 bg-[#38220f]
-        text-white px-8 py-4 rounded-full
-        hover:scale-105 duration-300">
+                CafeVerse is a luxury coffee destination where tradition meets modern craftsmanship.
 
-            Learn More
+                Every cup is carefully brewed using premium beans sourced from around the world.
 
-        </button>
+            </p>
+
+            <button class="mt-8 bg-[#C19A6B]
+            text-white px-8 py-4 rounded-full
+            hover:scale-105 duration-300">
+
+                Learn More
+
+            </button>
+
+        </div>
 
     </div>
 
 </div>
 
+
 </section>
+
     <!-- Popular Menu -->
 
     <section id="menu" class="py-20 bg-[#dbc1ac]">
@@ -457,54 +500,81 @@ grid md:grid-cols-2 gap-16 items-center">
 
     </section>
 
-    
+
 
     <!-- Statistics -->
 
-    <section class="py-20">
+    <!-- Statistics + Gallery Section -->
 
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 " data-aos="zoom-in">
+    <section class="relative py-20 overflow-hidden">
 
-            <div class="text-center">
-                <h1 class="text-5xl font-bold text-[#38220f]">10K+</h1>
-                <p>Happy Customers</p>
+        <!-- Background Video -->
+
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+
+            <source src="/static/videos/bg-2.mp4" type="video/mp4">
+
+        </video>
+
+        <!-- Dark Overlay -->
+
+        <div class="absolute inset-0 bg-black/60"></div>
+
+        <!-- Content -->
+
+        <div class="relative z-10">
+
+            <!-- Statistics -->
+
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8" data-aos="zoom-in">
+
+                <div class="text-center text-white">
+                    <h1 class="text-5xl font-bold text-[#e6ccb2]">10K+</h1>
+                    <p>Happy Customers</p>
+                </div>
+
+                <div class="text-center text-white">
+                    <h1 class="text-5xl font-bold text-[#e6ccb2]">50+</h1>
+                    <p>Drinks</p>
+                </div>
+
+                <div class="text-center text-white">
+                    <h1 class="text-5xl font-bold text-[#e6ccb2]">15+</h1>
+                    <p>Years Experience</p>
+                </div>
+
+                <div class="text-center text-white">
+                    <h1 class="text-5xl font-bold text-[#e6ccb2]">100%</h1>
+                    <p>Organic Quality</p>
+                </div>
+
             </div>
 
-            <div class="text-center">
-                <h1 class="text-5xl font-bold text-[#38220f]">50+</h1>
-                <p>Drinks</p>
-            </div>
+            <!-- Gallery -->
 
-            <div class="text-center">
-                <h1 class="text-5xl font-bold text-[#38220f]">15+</h1>
-                <p>Years Experience</p>
-            </div>
+            <div class="max-w-7xl mx-auto px-6 mt-28">
 
-            <div class="text-center">
-                <h1 class="text-5xl font-bold text-[#38220f]">100%</h1>
-                <p>Organic Quality</p>
+                <h2 class="text-center text-5xl font-bold mb-16 text-white">
+
+                    Instagram Gallery
+
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                    <img src="/static/images/back5.jpg" class="rounded-3xl hover:scale-105 duration-300 shadow-2xl">
+
+                    <img src="/static/images/back7.jpg" class="rounded-3xl hover:scale-105 duration-300 shadow-2xl">
+
+                    <img src="/static/images/back9.jpg" class="rounded-3xl hover:scale-105 duration-300 shadow-2xl">
+
+                </div>
+
             </div>
 
         </div>
 
     </section>
-
-<section class="py-20">
-
-<h2 class="text-center text-5xl font-bold mb-16">
-Instagram Gallery
-</h2>
-
-<div class="grid grid-cols-4 md:grid-cols-3 gap-3">
-
-<img src="/static/images/back5.jpg" class="rounded-3xl hover:scale-105 duration-300">
-
-<img src="/static/images/back7.jpg" class="rounded-3xl hover:scale-105 duration-300">
-<img src="/static/images/back9.jpg" class="rounded-3xl hover:scale-105 duration-300">
-
-</div>
-
-</section>
     <!-- Footer -->
 
     <footer class="bg-[#1A120B] text-white">
