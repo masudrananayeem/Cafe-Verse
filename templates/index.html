@@ -27,76 +27,81 @@
 
     <nav class="fixed top-0 left-0 w-full z-50 bg-black/40 backdrop-blur-md">
 
-        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+<div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
 
-            <a href="/" class="flex items-center group">
+    <!-- Logo -->
+    <a href="/" class="flex items-center group">
 
-    <img src="{{ url_for('static', filename='images/logo.png') }}"
-         alt="CafeVerse Logo"
-         class="h-11 md:h-13 lg:h-15  w-auto object-contain
-                scale-125
-                transition duration-300
-                group-hover:scale-150">
+        <img src="{{ url_for('static', filename='images/logo.png') }}"
+             alt="CafeVerse Logo"
+             class="h-11 w-auto object-contain scale-125
+                    transition duration-300 group-hover:scale-150">
 
-</a>
-            <ul class="hidden md:flex gap-8 text-white items-center">
+    </a>
 
-                <li><a href="#" class="hover:text-amber-300 duration-300">Home</a></li>
+    <!-- Center Menu -->
+    <ul class="hidden md:flex gap-10 text-white absolute left-1/2 transform -translate-x-1/2">
 
-                <li><a href="#menu" class="hover:text-amber-300 duration-300">Menu</a></li>
+        <li>
+            <a href="#" class="hover:text-amber-300 duration-300">
+                Home
+            </a>
+        </li>
 
-                <li><a href="#reviews" class="hover:text-amber-300 duration-300">Reviews</a></li>
+        <li>
+            <a href="#menu" class="hover:text-amber-300 duration-300">
+                Menu
+            </a>
+        </li>
 
-                <li>
-                    <a href="/admin-login" class="bg-amber-700 px-5 py-2 rounded-full hover:bg-amber-800 duration-300">
+        <li>
+            <a href="#reviews" class="hover:text-amber-300 duration-300">
+                Reviews
+            </a>
+        </li>
 
-                        Admin Login
+    </ul>
 
-                    </a>
-                </li>
+    <!-- Right Side -->
+    <div class="flex items-center gap-4">
 
-                <li>
+        <a href="/admin-login"
+           class="hidden md:block bg-amber-700 px-6 py-3 rounded-full
+                  hover:bg-amber-800 duration-300 text-white">
 
-                    <a href="/login"
-                        class="border border-white px-5 py-2 rounded-full hover:bg-white hover:text-black duration-300">
+            Admin Login
 
-                        Login
+        </a>
 
-                    </a>
+        <!-- Mobile Menu Button -->
+        <button id="menuBtn" class="md:hidden text-white text-3xl">
+            ☰
+        </button>
 
-                </li>
+    </div>
 
-            </ul>
-
-            <button id="menuBtn" class="md:hidden text-white text-3xl">
-
-                ☰
-
-            </button>
-
-
-
-        </div>
+</div>
 
         <!-- Mobile Menu -->
+<div id="mobileMenu" class="hidden md:hidden bg-black/90 text-white">
 
-        <div id="mobileMenu" class="hidden md:hidden bg-black/90 text-white">
+    <a href="#" class="block px-6 py-4 border-b">
+        Home
+    </a>
 
-            <a href="#" class="block px-6 py-4 border-b">Home</a>
+    <a href="#menu" class="block px-6 py-4 border-b">
+        Menu
+    </a>
 
-            <a href="#menu" class="block px-6 py-4 border-b">Menu</a>
+    <a href="#reviews" class="block px-6 py-4 border-b">
+        Reviews
+    </a>
 
-            <a href="#reviews" class="block px-6 py-4 border-b">Reviews</a>
+    <a href="/admin-login" class="block px-6 py-4">
+        Admin Login
+    </a>
 
-            <a href="/admin-login" class="block px-6 py-4 border-b">
-                Admin Login
-            </a>
-
-            <a href="/login" class="block px-6 py-4">
-                Login
-            </a>
-
-        </div>
+</div>
 
     </nav>
 
