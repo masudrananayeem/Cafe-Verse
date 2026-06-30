@@ -21,7 +21,11 @@
         }
 
         body {
-            background: #0b0a0f;
+             background: #0b0a0f;
+    background-image: url("{{ url_for('static', filename='images/back9.jpg') }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
             color: white;
         }
 
@@ -46,16 +50,13 @@
 
     <!-- Sidebar -->
 
-    <aside class="fixed top-0 left-0 w-64 h-screen glass border-r border-white/10">
+    <aside class="fixed top-0 left-0 w-64 h-screen glass border-r border-white/10 z-50">
 
         <div class="p-6 border-b border-white/10">
 
-            <h1
-                class="text-4xl font-extrabold bg-gradient-to-r from-[#e6ccb2] via-[#ddb892] to-[#b08968] bg-clip-text text-transparent">
-
-                ☕ CafeVerse
-
-            </h1>
+             <img src="{{ url_for('static', filename='images/logo.png') }}"
+     alt="CafeVerse Logo"
+     class="h-16 w-auto object-contain">
 
         </div>
 
@@ -70,7 +71,7 @@
             </a>
 
             <a href="/manage-products"
-                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300">
+                  class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300">
 
                 <i class="fa-solid fa-mug-hot"></i>
                 Products
@@ -78,7 +79,7 @@
             </a>
 
             <a href="/orders"
-                class="active-menu flex items-center gap-3 p-4 rounded-xl">
+               class="active-menu flex items-center gap-3 p-4 rounded-xl">
 
                 <i class="fa-solid fa-box"></i>
                 Orders
@@ -93,6 +94,22 @@
 
             </a>
 
+            <a href="#"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300">
+
+                <i class="fa-solid fa-chart-pie"></i>
+                Analytics
+
+            </a>
+
+            <a href="#"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300">
+
+                <i class="fa-solid fa-gear"></i>
+                Settings
+
+            </a>
+
             <a href="/logout"
                 class="flex items-center gap-3 p-4 rounded-xl hover:bg-red-500 duration-300">
 
@@ -104,6 +121,7 @@
         </nav>
 
     </aside>
+
 
 
     <!-- Main Content -->
