@@ -1,295 +1,343 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafe Verse Dashboard</title>
-
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CafeVerse Dashboard</title>
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <style>
+        /* base & reset */
         * {
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
-
         body {
-            background: #f5f5f5;
-            background:
-                linear-gradient(rgba(0, 0, 0, .55),
-                    rgba(0, 0, 0, .55)),
-                url("/static/images/dashboard-2.avif");
-
+            background: linear-gradient(rgba(0, 0, 0, .75), rgba(0, 0, 0, .75)), url('/static/images/coffee2.jpg');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
+            color: #f5efe8;
+            transition: background 0.3s, color 0.3s;
+            min-height: 100vh;
         }
-
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 260px;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 25px;
-            color: white;
-
-
+        /* glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, .05);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, .08);
         }
-
-
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 40px;
+        .card-hover {
+            transition: .4s;
         }
-
-        .sidebar ul {
-            list-style: none;
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(190, 130, 90, .25);
         }
-
-        .sidebar ul li {
-            margin: 20px 0;
+        .active-menu {
+            background: linear-gradient(135deg, #6f4e37, #b08968);
         }
-
-        .sidebar ul li a {
-
-            display: flex;
-            align-items: center;
-
-            gap: 10px;
-
-            padding: 14px 18px;
-
-            border-radius: 12px;
-
-            transition: .3s;
-
-            color: white;
-
-            text-decoration: none;
+        /* sidebar scroll */
+        #sidebar::-webkit-scrollbar {
+            width: 8px;
         }
-
-        .sidebar ul li a:hover {
-
-            background: rgba(255, 255, 255, .12);
-
-            transform: translateX(8px);
+        #sidebar::-webkit-scrollbar-track {
+            background: transparent;
         }
-
-        .main {
-            margin-left: 260px;
-            padding: 30px;
+        #sidebar::-webkit-scrollbar-thumb {
+            background: #b08968;
+            border-radius: 20px;
         }
-
-        .topbar {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
-        }
-
-        .card h3 {
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        .card h1 {
-            color: #3e2c21;
-        }
-
-        .welcome {
-            margin-top: 30px;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 25px;
-            background: #3e2c21;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-
-        .hero-banner {
-
-            margin-top: 35px;
-
-            height: 380px;
-
-            border-radius: 25px;
-
-            overflow: hidden;
-
-            display: flex;
-
-            align-items: center;
-
-            padding: 60px;
-
-            background:
-                linear-gradient(rgba(0, 0, 0, .55),
-                    rgba(0, 0, 0, .55)),
-                url("/static/images/dashboard-1.jpg");
-
-            background-size: cover;
-            background-position: center;
-
-            box-shadow:
-                0 20px 40px rgba(0, 0, 0, .15);
-        }
-
-        .hero-content {
-
-            color: white;
-
-            /*max-width:600px;*/
-        }
-
-        .hero-content h1 {
-
-            font-size: 55px;
-
-            margin-bottom: 15px;
-
-            font-weight: 700;
-        }
-
-        .hero-content p {
-
-            font-size: 18px;
-
-            line-height: 1.7;
-
-            margin-bottom: 25px;
-        }
-
-        .hero-btn {
-
-            display: inline-block;
-
-            padding: 14px 28px;
-
-            background: #3e2c21;
-
-            color: white;
-
-            text-decoration: none;
-
-            border-radius: 10px;
-
-            transition: .3s;
-        }
-
-        .hero-btn:hover {
-
+        #sidebar::-webkit-scrollbar-thumb:hover {
             background: #6f4e37;
-
-            transform: translateY(-3px);
+        }
+        /* light mode */
+        .light-mode {
+            background: url("/static/images/dashboard_white_bg.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #2d2d2d;
+        }
+        .light-mode .active-menu {
+            background: linear-gradient(135deg, #8B5E3C, #C89B6D);
+            color: white;
+        }
+        .light-mode .glass {
+            background: rgba(255, 255, 255, .6);
+            backdrop-filter: blur(12px);
+            border-color: rgba(0, 0, 0, .08);
+        }
+        .light-mode .card-hover:hover {
+            box-shadow: 0 25px 50px rgba(0, 0, 0, .15);
+        }
+        .light-mode .text-gray-300 {
+            color: #4a4a4a;
+        }
+        .light-mode .text-gray-400 {
+            color: #555;
+        }
+        .light-mode h1,
+        .light-mode h2,
+        .light-mode h3 {
+            color: #1e1e1e;
+        }
+        .light-mode .bg-black\/60 {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .light-mode .border-white\/10 {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        .light-mode .text-white {
+            color: #1e1e1e;
+        }
+        .light-mode .text-gray-200 {
+            color: #333;
+        }
+        .light-mode .bg-gradient-to-r {
+            background: linear-gradient(135deg, #8B5E3C, #C89B6D);
+            color: white;
+        }
+        /* mobile overlay */
+        #overlay {
+            transition: opacity 0.2s;
+        }
+        /* Fix for main content duplicate class */
+        .main-content {
+            transition: margin-left 0.3s;
+        }
+        /* button hover */
+        .hover\:bg-red-500:hover {
+            background-color: rgba(239, 68, 68, 0.7);
+        }
+        /* small tweaks */
+        img {
+            display: block;
+        }
+        .rounded-3xl {
+            border-radius: 1.5rem;
         }
     </style>
-
-
 </head>
-
 <body>
 
+    <!-- Mobile Menu Button -->
+    <button id="menuBtn" class="fixed top-5 left-5 z-[60] lg:hidden glass p-3 rounded-xl text-white hover:bg-white/10 transition">
+        <i class="fa-solid fa-bars text-xl"></i>
+    </button>
 
-    <div class="sidebar">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed top-0 left-0 w-72 h-screen glass z-50 
+        transform -translate-x-full lg:translate-x-0 
+        transition-transform duration-300 ease-in-out
+        overflow-y-auto overflow-x-hidden text-white flex flex-col">
 
-        <div class="logo">
-            🍵 Cafe Verse
+        <div class="p-8 border-b border-white/10 flex-shrink-0">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="CafeVerse" class="h-16 w-auto" />
         </div>
 
-        <ul>
-            <li><a href="/dashboard">🏠 Dashboard</a></li>
-            <li><a href="/menu">☕ Menu</a></li>
-            <li><a href="/cart">🛒 My Cart</a></li>
-            <li><a href="/profile">👤 Profile</a></li>
-            <li><a href="/logout">🚪 Logout</a></li>
-        </ul>
+        <nav class="p-5 space-y-3 pb-20 flex-1">
+            <a href="/dashboard" class="active-menu flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+                <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+            <a href="/menu" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+                <i class="fa-solid fa-mug-hot"></i> Menu
+            </a>
+            <a href="/cart" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+                <i class="fa-solid fa-cart-shopping"></i> My Cart
+            </a>
+            <a href="/profile" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+                <i class="fa-solid fa-user"></i> Profile
+            </a>
+            <a href="/logout" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-red-500/70 duration-300 transition">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+            <button id="themeToggle" class="glass w-14 h-14 rounded-2xl flex items-center justify-center text-xl hover:bg-white/10 transition">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </nav>
+    </aside>
+
+    <!-- overlay for mobile -->
+    <div id="overlay" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden"></div>
+
+    <!-- Main Content -->
+    <div class="lg:ml-72 p-6 lg:p-10 main-content transition-all duration-300">
+
+        <!-- Header -->
+        <div class="flex flex-col lg:flex-row justify-between items-center gap-6 mb-10">
+            <div>
+                <h1 class="text-5xl lg:text-6xl font-extrabold text-white">Welcome Back 👋</h1>
+                <p class="text-gray-300 text-xl mt-3">Welcome, {{ username }}</p>
+            </div>
+
+            <div class="glass px-6 py-3 rounded-3xl flex items-center gap-4 text-white">
+                <img src="/static/uploads/IMG_20240309_132326.jpg" 
+                     class="w-16 h-16 rounded-full border-2 border-[#b08968] object-cover" 
+                     alt="avatar" />
+                <div>
+                    <h3 class="font-bold text-xl">{{ username }}</h3>
+                    <p class="text-gray-400">Premium Member</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mb-10">
+            <div class="glass p-8 rounded-3xl card-hover text-white">
+                <i class="fa-solid fa-cart-shopping text-4xl text-amber-400"></i>
+                <h3 class="text-gray-300 mt-5">Total Orders</h3>
+                <h1 class="text-5xl font-bold mt-3">12</h1>
+            </div>
+            <div class="glass p-8 rounded-3xl card-hover text-white">
+                <i class="fa-solid fa-mug-hot text-4xl text-orange-400"></i>
+                <h3 class="text-gray-300 mt-5">Cart Items</h3>
+                <h1 class="text-5xl font-bold mt-3">5</h1>
+            </div>
+            <div class="glass p-8 rounded-3xl card-hover text-white">
+                <i class="fa-solid fa-heart text-4xl text-red-400"></i>
+                <h3 class="text-gray-300 mt-5">Favorite Teas</h3>
+                <h1 class="text-5xl font-bold mt-3">8</h1>
+            </div>
+            <div class="glass p-8 rounded-3xl card-hover text-white">
+                <i class="fa-solid fa-star text-4xl text-yellow-400"></i>
+                <h3 class="text-gray-300 mt-5">Reward Points</h3>
+                <h1 class="text-5xl font-bold mt-3">120</h1>
+            </div>
+        </div>
+
+        <!-- Hero Banner -->
+        <section class="relative rounded-[40px] overflow-hidden h-[450px] mb-10">
+            <img src="/static/images/dashboard-1.jpg" class="absolute w-full h-full object-cover" alt="banner" />
+            <div class="absolute inset-0 bg-black/60"></div>
+            <div class="relative z-10 h-full flex items-center p-10 lg:p-16">
+                <div>
+                    <h1 class="text-5xl lg:text-7xl font-extrabold mb-6 text-white">☕ CafeVerse</h1>
+                    <p class="text-xl lg:text-2xl text-gray-200 mb-8 max-w-2xl">
+                        Manage Products, Orders, Customers and enjoy a premium coffee experience.
+                    </p>
+                    <a href="/menu" class="bg-gradient-to-r from-[#6f4e37] to-[#b08968] px-10 py-5 rounded-2xl text-xl font-semibold hover:scale-105 duration-300 inline-block text-white">
+                        Explore Menu
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Activity -->
+        <div class="glass rounded-3xl p-8 text-white">
+            <h2 class="text-3xl font-bold mb-8">Recent Activities</h2>
+            <div class="space-y-6">
+                <div class="flex items-center gap-5">
+                    <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">Order #1025 Completed</h3>
+                        <p class="text-gray-400">2 minutes ago</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-5">
+                    <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">New User Registered</h3>
+                        <p class="text-gray-400">15 minutes ago</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-5">
+                    <div class="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center text-white">
+                        <i class="fa-solid fa-coffee"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">New Coffee Added</h3>
+                        <p class="text-gray-400">1 hour ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 
-    <div class="main">
+    <script>
+        (function() {
+            "use strict";
 
-        <div class="topbar">
-            <h2>Welcome, {{ username }}</h2>
-            <p>Cafe Verse Management System</p>
-        </div>
+            const menuBtn = document.getElementById('menuBtn');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const themeToggle = document.getElementById('themeToggle');
 
-        <div class="cards">
+            // ----- sidebar toggle (mobile) -----
+            function toggleSidebar(force) {
+                const isHidden = sidebar.classList.contains('-translate-x-full');
+                if (force === 'open') {
+                    sidebar.classList.remove('-translate-x-full');
+                    overlay.classList.remove('hidden');
+                } else if (force === 'close') {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.add('hidden');
+                } else {
+                    if (isHidden) {
+                        sidebar.classList.remove('-translate-x-full');
+                        overlay.classList.remove('hidden');
+                    } else {
+                        sidebar.classList.add('-translate-x-full');
+                        overlay.classList.add('hidden');
+                    }
+                }
+            }
 
-            <div class="card">
-                <h3>Total Orders</h3>
-                <h1>12</h1>
-            </div>
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleSidebar();
+            });
 
-            <div class="card">
-                <h3>Cart Items</h3>
-                <h1>5</h1>
-            </div>
+            overlay.addEventListener('click', function() {
+                toggleSidebar('close');
+            });
 
-            <div class="card">
-                <h3>Favorite Teas</h3>
-                <h1>8</h1>
-            </div>
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+                    toggleSidebar('close');
+                }
+            });
 
-            <div class="card">
-                <h3>Reward Points</h3>
-                <h1>120</h1>
-            </div>
+            // large screen handler
+            const mediaQuery = window.matchMedia('(min-width: 1024px)');
+            function handleLg(e) {
+                if (e.matches) {
+                    sidebar.classList.remove('-translate-x-full');
+                    overlay.classList.add('hidden');
+                } else {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.add('hidden');
+                }
+            }
+            mediaQuery.addEventListener('change', handleLg);
+            handleLg(mediaQuery);
 
-        </div>
+            // ----- theme toggle -----
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('light-mode');
+                const icon = this.querySelector('i');
+                if (document.body.classList.contains('light-mode')) {
+                    icon.className = 'fa-solid fa-sun';
+                } else {
+                    icon.className = 'fa-solid fa-moon';
+                }
+            });
 
-        <div class="hero-banner">
-
-            <div class="hero-content">
-
-                <h1>☕ Welcome to CafeVerse</span> </h1>
-
-                <p>
-                    Manage Products, Orders, Customers and Grow Your Coffee Business.
-                </p>
-
-                <a href="/menu" class="hero-btn">
-                    Explore Menu
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
+        })();
+    </script>
 
 </body>
-
 </html>
