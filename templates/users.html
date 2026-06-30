@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Users | CafeVerse Admin</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background:
+                linear-gradient(rgba(0, 0, 0, .75),
+                    rgba(0, 0, 0, .75)),
+                url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600');
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, .06);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .active-menu {
+            background: linear-gradient(135deg, #6f4e37, #b08968);
+        }
+
+        .card-hover {
+            transition: .4s;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+
+    <aside class="fixed top-0 left-0 w-64 h-screen glass border-r border-white/10 z-50">
+
+        <div class="p-6 border-b border-white/10">
+
+            <img src="{{ url_for('static', filename='images/logo.png') }}"
+                class="h-16 w-auto object-contain">
+
+        </div>
+
+        <nav class="p-4 space-y-3">
+
+            <a href="/admin"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300">
+
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+
+            </a>
+
+            <a href="/manage-products"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300">
+
+                <i class="fa-solid fa-mug-hot"></i>
+                Products
+
+            </a>
+
+            <a href="/orders"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300">
+
+                <i class="fa-solid fa-box"></i>
+                Orders
+
+            </a>
+
+            <a href="/users"
+                class="active-menu flex items-center gap-3 p-4 rounded-xl">
+
+                <i class="fa-solid fa-users"></i>
+                Users
+
+            </a>
+
+            <a href="/analytics"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300">
+
+                <i class="fa-solid fa-chart-pie"></i>
+                Analytics
+
+            </a>
+
+            <a href="/settings"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10 duration-300">
+
+                <i class="fa-solid fa-gear"></i>
+                Settings
+
+            </a>
+
+            <a href="/logout"
+                class="flex items-center gap-3 p-4 rounded-xl hover:bg-red-500 duration-300">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <div class="ml-64 p-8">
+
+        <!-- Header -->
+
+        <div class="mb-10">
+
+            <h1 class="text-6xl font-bold mb-3">
+                👥 Users
+            </h1>
+
+            <p class="text-gray-300 text-xl">
+                Manage all registered CafeVerse users.
+            </p>
+
+        </div>
+
+        <!-- Stats -->
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+
+            <div class="glass rounded-3xl p-8 card-hover">
+
+                <h3 class="text-gray-300 text-xl">
+                    Total Users
+                </h3>
+
+                <h1 class="text-5xl font-bold mt-4">
+                    120
+                </h1>
+
+            </div>
+
+            <div class="glass rounded-3xl p-8 card-hover">
+
+                <h3 class="text-gray-300 text-xl">
+                    Active Users
+                </h3>
+
+                <h1 class="text-5xl font-bold text-green-400 mt-4">
+                    98
+                </h1>
+
+            </div>
+
+            <div class="glass rounded-3xl p-8 card-hover">
+
+                <h3 class="text-gray-300 text-xl">
+                    Blocked Users
+                </h3>
+
+                <h1 class="text-5xl font-bold text-red-400 mt-4">
+                    22
+                </h1>
+
+            </div>
+
+        </div>
+
+        <!-- Search -->
+
+        <div class="glass rounded-3xl p-6 mb-10">
+
+            <input type="text"
+                placeholder="🔍 Search Users..."
+                class="w-full p-4 rounded-xl bg-black/20 border border-white/10 outline-none">
+
+        </div>
+
+        <!-- Users Table -->
+
+        <div class="glass rounded-3xl p-8 overflow-x-auto">
+
+            <h2 class="text-3xl font-bold mb-8">
+                Registered Users
+            </h2>
+
+            <table class="w-full">
+
+                <thead>
+
+                    <tr class="border-b border-white/10 text-left">
+
+                        <th class="pb-5">Name</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Joined</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr class="border-b border-white/10">
+
+                        <td class="py-6">Masud Rana</td>
+
+                        <td>masud@gmail.com</td>
+
+                        <td>
+
+                            <span class="bg-green-500 px-4 py-2 rounded-full">
+                                Active
+                            </span>
+
+                        </td>
+
+                        <td>29 Jun 2026</td>
+
+                        <td>
+
+                            <button
+                                class="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-xl duration-300">
+
+                                Delete
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr class="border-b border-white/10">
+
+                        <td class="py-6">Shuvo</td>
+
+                        <td>shuvo@gmail.com</td>
+
+                        <td>
+
+                            <span class="bg-yellow-500 px-4 py-2 rounded-full">
+                                Pending
+                            </span>
+
+                        </td>
+
+                        <td>25 Jun 2026</td>
+
+                        <td>
+
+                            <button
+                                class="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-xl duration-300">
+
+                                Delete
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td class="py-6">Sadman</td>
+
+                        <td>sadman@gmail.com</td>
+
+                        <td>
+
+                            <span class="bg-blue-500 px-4 py-2 rounded-full">
+                                Premium
+                            </span>
+
+                        </td>
+
+                        <td>20 Jun 2026</td>
+
+                        <td>
+
+                            <button
+                                class="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-xl duration-300">
+
+                                Delete
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
