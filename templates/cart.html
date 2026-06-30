@@ -1,250 +1,525 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-
-<title>My Cart</title>
-
-<style>
-
-     * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CafeVerse · My Cart</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <style>
+        /* base & reset */
+        * { 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
         }
-
         body {
-            background: #f5f5f5;
-            background:
-                linear-gradient(rgba(0, 0, 0, .55),
-                    rgba(0, 0, 0, .55)),
-                url("/static/images/dashboard-2.avif");
-
+            background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.75)), url('/static/images/coffee2.jpg');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #f5efe8;
+            transition: background 0.3s, color 0.3s;
         }
-
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 260px;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
+        /* glassmorphism base */
+        .glass {
+            background: rgba(255,255,255,.05);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,.08);
+        }
+        /* card hover effect */
+        .card-hover {
+            transition: .4s;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(190, 130, 90, .25);
+        }
+        /* active menu item */
+        .active-menu {
+            background: linear-gradient(135deg, #6f4e37, #b08968);
+        }
+        /* sidebar scroll */
+        #sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+        #sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #sidebar::-webkit-scrollbar-thumb {
+            background: #b08968;
+            border-radius: 20px;
+        }
+        #sidebar::-webkit-scrollbar-thumb:hover {
+            background: #6f4e37;
+        }
+        /* light mode */
+        .light-mode {
+            background: url("/static/images/dashboard_white_bg.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #2d2d2d;
+        }
+        .light-mode .active-menu {
+            background: linear-gradient(135deg, #8B5E3C, #C89B6D);
+            color: white;
+        }
+        .light-mode .glass {
+            background: rgba(255, 255, 255, .6);
+            backdrop-filter: blur(12px);
+            border-color: rgba(0, 0, 0, .08);
+        }
+        .light-mode .card-hover:hover {
+            box-shadow: 0 25px 50px rgba(0, 0, 0, .15);
+        }
+        .light-mode .text-gray-300 {
+            color: #4a4a4a;
+        }
+        .light-mode .text-gray-400 {
+            color: #555;
+        }
+        .light-mode h1,
+        .light-mode h2,
+        .light-mode h3 {
+            color: #1e1e1e;
+        }
+        .light-mode .bg-black\/60 {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .light-mode .border-white\/10 {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        .light-mode .text-white {
+            color: #1e1e1e;
+        }
+        .light-mode .text-gray-200 {
+            color: #333;
+        }
+        .light-mode .bg-gradient-to-r {
+            background: linear-gradient(135deg, #8B5E3C, #C89B6D);
+            color: white;
+        }
+        .light-mode .cart-card {
+            background: rgba(255,255,255,.9);
+            border-color: rgba(0,0,0,.1);
+        }
+        .light-mode .cart-card h2 {
+            color: #3e2c21;
+        }
+        .light-mode .cart-card p {
+            color: #555;
+        }
+        .light-mode .empty-cart {
+            background: rgba(255,255,255,.9);
+            border-color: rgba(0,0,0,.1);
+        }
+        .light-mode .empty-cart h2 {
+            color: #3e2c21;
+        }
+        .light-mode .cart-summary {
+            background: rgba(255,255,255,.9);
+            border-color: rgba(0,0,0,.1);
+        }
+        /* cart card styles */
+        .cart-card {
+            background: rgba(255,255,255,.08);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
             padding: 25px;
-            color: white;
-
-
-        }
-
-
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 40px;
-        }
-
-        .sidebar ul {
-            list-style: none;
-        }
-
-        .sidebar ul li {
-            margin: 20px 0;
-        }
-
-        .sidebar ul li a {
-
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,.06);
             display: flex;
+            justify-content: space-between;
             align-items: center;
-
-            gap: 10px;
-
-            padding: 14px 18px;
-
-            border-radius: 12px;
-
             transition: .3s;
-
+        }
+        .cart-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,.2);
+        }
+        .cart-card .info h2 {
+            color: #f0e3d8;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .cart-card .info p {
+            color: #ccc;
+            margin: 5px 0;
+            font-weight: 300;
+        }
+        .cart-card .info .price-tag {
+            color: #d4a373;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        .cart-card .info .quantity-tag {
+            color: #b08968;
+            font-weight: 500;
+        }
+        .delete-btn {
+            background: #dc3545;
             color: white;
-
             text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            transition: .3s;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-
-        .sidebar ul li a:hover {
-
-            background: rgba(255, 255, 255, .12);
-
-            transform: translateX(8px);
+        .delete-btn:hover {
+            background: #b02a37;
+            transform: scale(1.05);
         }
-
-        .main {
-            margin-left: 260px;
-            padding: 30px;
+        .empty-cart {
+            background: rgba(255,255,255,.08);
+            backdrop-filter: blur(4px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            text-align: center;
+            max-width: 500px;
+            margin: 40px auto;
+            border: 1px solid rgba(255,255,255,.06);
         }
-
-    h1{
-        margin-bottom:30px;
-        color:#ffffff;
-    }
-
-    .cart-container{
-        max-width:900px;
-        margin:auto;
-    }
-
-    .cart-card{
-
-        background:white;
-
-        padding:25px;
-
-        border-radius:15px;
-
-        margin-bottom:20px;
-
-        box-shadow:0 4px 10px rgba(0,0,0,.08);
-
-        display:flex;
-
-        justify-content:space-between;
-
-        align-items:center;
-    }
-
-    .info h2{
-        color:#3e2c21;
-        margin-bottom:10px;
-    }
-
-    .info p{
-        color:#666;
-        margin:5px 0;
-    }
-
-    .delete-btn{
-
-        background:#dc3545;
-
-        color:white;
-
-        text-decoration:none;
-
-        padding:10px 18px;
-
-        border-radius:8px;
-
-        transition:.3s;
-    }
-
-    .delete-btn:hover{
-
-        background:#b02a37;
-    }
-
-    .empty-cart{
-
-    background:white;
-
-    padding:40px;
-
-    border-radius:20px;
-
-    text-align:center;
-
-    max-width:500px;
-
-    margin:80px auto;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.15);
-}
-
-.empty-cart h2{
-
-    color:#3e2c21;
-}
-
-</style>
-
-
+        .empty-cart h2 {
+            color: #f0e3d8;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .empty-cart .empty-icon {
+            font-size: 80px;
+            color: #b08968;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .browse-btn {
+            background: linear-gradient(135deg, #6f4e37, #b08968);
+            color: white;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 40px;
+            transition: .3s;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .browse-btn:hover {
+            transform: scale(1.05);
+        }
+        /* cart summary */
+        .cart-summary {
+            background: rgba(255,255,255,.08);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px solid rgba(255,255,255,.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .cart-summary .total-label {
+            font-size: 20px;
+            font-weight: 500;
+            color: #ccc;
+        }
+        .cart-summary .total-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #d4a373;
+        }
+        .checkout-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 40px;
+            transition: .3s;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .checkout-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
+        }
+        .clear-cart-btn {
+            background: rgba(255,255,255,.1);
+            color: #dc3545;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            transition: .3s;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        .clear-cart-btn:hover {
+            background: rgba(220, 53, 69, 0.2);
+            transform: scale(1.05);
+        }
+        /* overlay */
+        #overlay { transition: opacity 0.2s; }
+        /* responsive */
+        @media (max-width: 768px) {
+            .cart-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            .cart-card .info {
+                width: 100%;
+            }
+            .cart-summary {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-    <!-- Sidebar -->
+    <!-- mobile menu button -->
+    <button id="menuBtn" class="fixed top-5 left-5 z-[60] lg:hidden glass p-3 rounded-xl text-white hover:bg-white/10 transition">
+        <i class="fa-solid fa-bars text-xl"></i>
+    </button>
 
-    <div class="sidebar">
-
-        <div class="logo">
-            🍵 Cafe Verse
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="fixed top-0 left-0 w-72 h-screen glass z-50 
+        transform -translate-x-full lg:translate-x-0 
+        transition-transform duration-300 ease-in-out
+        overflow-y-auto overflow-x-hidden text-white
+        flex flex-col">
+        
+        <div class="p-8 border-b border-white/10 flex-shrink-0">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="CafeVerse" class="h-16 w-auto" />
         </div>
 
-        <ul>
-            <li><a href="/dashboard">🏠 Dashboard</a></li>
-            <li><a href="/menu">☕ Tea Menu</a></li>
-            <li><a href="/cart">🛒 My Cart</a></li>
-            <li><a href="/profile">👤 Profile</a></li>
-            <li><a href="/logout">🚪 Logout</a></li>
-        </ul>
+        <nav class="p-5 space-y-3 pb-20 flex-1">
+            <a href="/dashboard" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+                <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+            <a href="/menu" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+                <i class="fa-solid fa-mug-hot"></i> Menu
+            </a>
+            <a href="/cart" class="active-menu flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+                <i class="fa-solid fa-cart-shopping"></i> My Cart
+                {% if cart_items %}
+                <span class="ml-auto bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center">
+                    {{ cart_items|length }}
+                </span>
+                {% endif %}
+            </a>
+            <a href="/profile" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+                <i class="fa-solid fa-user"></i> Profile
+            </a>
+            <a href="/logout" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-red-500/70 duration-300 transition">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+            <button id="themeToggle" class="glass w-14 h-14 rounded-2xl flex items-center justify-center text-xl hover:bg-white/10 transition">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </nav>
+    </aside>
 
-    </div>
+    <!-- overlay (mobile) -->
+    <div id="overlay" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden"></div>
 
-    <!-- Main Content -->
+    <!-- MAIN CONTENT -->
+    <div class="lg:ml-72 p-6 lg:p-10 transition-all duration-300">
 
-    <div class="main">
-
-        <div class="cart-container">
-
-            <h1>🛒 My Cart</h1>
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- Header -->
+            <div class="flex items-center gap-4 mb-10">
+                <div class="glass p-4 rounded-2xl">
+                    <i class="fa-solid fa-cart-shopping text-3xl text-amber-400"></i>
+                </div>
+                <div>
+                    <h1 class="text-4xl lg:text-5xl font-extrabold text-white">My Cart</h1>
+                    <p class="text-gray-300 text-lg mt-1">Review your items before checkout</p>
+                </div>
+            </div>
 
             {% if cart_items %}
-
-                {% for item in cart_items %}
-
-                <div class="cart-card">
-
-                    <div class="info">
-
-                        <h2>{{ item[1] }}</h2>
-
-                        <p>Price: ${{ item[2] }}</p>
-
-                        <p>Quantity: {{ item[3] }}</p>
-
+                <!-- Cart Items -->
+                <div class="space-y-4">
+                    {% for item in cart_items %}
+                    <div class="cart-card card-hover">
+                        <div class="info flex-1">
+                            <h2 class="text-xl lg:text-2xl">{{ item[1] }}</h2>
+                            <div class="flex flex-wrap gap-4 mt-2">
+                                <p class="price-tag"><i class="fa-solid fa-tag mr-2"></i>${{ "%.2f"|format(item[2]) }}</p>
+                                <p class="quantity-tag"><i class="fa-solid fa-cubes mr-2"></i>Quantity: {{ item[3] }}</p>
+                                <p class="text-amber-400 font-semibold">
+                                    <i class="fa-solid fa-calculator mr-2"></i>
+                                    Subtotal: ${{ "%.2f"|format(item[2] * item[3]) }}
+                                </p>
+                            </div>
+                        </div>
+                        <a href="/delete_cart/{{ item[0] }}" class="delete-btn">
+                            <i class="fa-solid fa-trash-can"></i> Delete
+                        </a>
                     </div>
-
-                    <a href="/delete_cart/{{ item[0] }}"
-                       class="delete-btn">
-
-                        Delete
-
-                    </a>
-
+                    {% endfor %}
                 </div>
 
+                <!-- Cart Summary -->
+                {% set ns = namespace(total=0) %}
+                {% for item in cart_items %}
+                    {% set ns.total = ns.total + (item[2] * item[3]) %}
                 {% endfor %}
+                
+                <div class="cart-summary">
+                    <div>
+                        <span class="total-label"><i class="fa-solid fa-cart-shopping mr-2"></i>Total Items:</span>
+                        <span class="text-white font-bold text-xl ml-2">{{ cart_items|length }}</span>
+                    </div>
+                    <div>
+                        <span class="total-label"><i class="fa-solid fa-circle-dollar mr-2"></i>Grand Total:</span>
+                        <span class="total-amount">${{ "%.2f"|format(ns.total) }}</span>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="/clear_cart" class="clear-cart-btn">
+                            <i class="fa-solid fa-trash-can"></i> Clear Cart
+                        </a>
+                        <a href="/checkout" class="checkout-btn">
+                            <i class="fa-solid fa-lock"></i> Checkout
+                        </a>
+                    </div>
+                </div>
 
             {% else %}
-
+                <!-- Empty Cart -->
                 <div class="empty-cart">
-
-                    <h2>Your Cart is Empty 😔</h2>
-
-                    <br>
-
-                    <a href="/menu" class="delete-btn">
-                        Browse Menu
+                    <i class="fa-solid fa-cart-plus empty-icon"></i>
+                    <h2 class="text-2xl">Your Cart is Empty 😔</h2>
+                    <p class="text-gray-400 mb-6">Looks like you haven't added any items yet. Start exploring our delicious menu!</p>
+                    <a href="/menu" class="browse-btn">
+                        <i class="fa-solid fa-mug-hot mr-2"></i> Browse Menu
                     </a>
-
                 </div>
-
             {% endif %}
 
         </div>
-
     </div>
 
-</body>
+    <script>
+        (function() {
+        "use strict";
 
+        // DOM elements
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const themeToggle = document.getElementById('themeToggle');
+
+        // -------- SIDEBAR TOGGLE (mobile) --------
+        function toggleSidebar(forceState) {
+            const isHidden = sidebar.classList.contains('-translate-x-full');
+            if (forceState === 'open') {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else if (forceState === 'close') {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            } else {
+                if (isHidden) {
+                    sidebar.classList.remove('-translate-x-full');
+                    overlay.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            }
+        }
+
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleSidebar();
+        });
+
+        overlay.addEventListener('click', function() {
+            toggleSidebar('close');
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+                toggleSidebar('close');
+            }
+        });
+
+        const mediaQuery = window.matchMedia('(min-width: 1024px)');
+        function handleLgChange(e) {
+            if (e.matches) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+        mediaQuery.addEventListener('change', handleLgChange);
+        handleLgChange(mediaQuery);
+
+        // -------- THEME TOGGLE --------
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            const icon = this.querySelector('i');
+            if (document.body.classList.contains('light-mode')) {
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+            }
+        });
+
+        // -------- CONFIRM DELETE --------
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (!confirm('Are you sure you want to remove this item from your cart?')) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        // -------- CONFIRM CLEAR CART --------
+        document.querySelector('.clear-cart-btn')?.addEventListener('click', function(e) {
+            if (!confirm('Are you sure you want to clear your entire cart?')) {
+                e.preventDefault();
+            }
+        });
+
+        // -------- CONFIRM CHECKOUT --------
+        document.querySelector('.checkout-btn')?.addEventListener('click', function(e) {
+            if (!confirm('Ready to checkout? Please review your items.')) {
+                e.preventDefault();
+            }
+        });
+
+        console.log('CafeVerse cart ready');
+        })();
+    </script>
+
+</body>
 </html>
