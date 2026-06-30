@@ -415,6 +415,11 @@ def orders():
 
     return render_template('orders.html')
 
+#user html file route
+@app.route('/users')
+def users():
+    return render_template('users.html')
+
 # Logout
 @app.route('/logout')
 def logout():
