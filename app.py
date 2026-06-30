@@ -420,6 +420,15 @@ def orders():
 def users():
     return render_template('users.html')
 
+#analytics and the setting part
+@app.route('/analytics')
+def analytics():
+    return render_template('analytics.html')
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
+
 # Logout
 @app.route('/logout')
 def logout():
