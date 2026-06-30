@@ -3,191 +3,301 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Settings | CafeVerse Admin</title>
+    <title>Settings | CafeVerse Admin</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-<style>
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
 
-*{
-font-family:'Poppins',sans-serif;
-}
+        body {
 
-body{
+            background:
+                linear-gradient(rgba(0, 0, 0, .75),
+                    rgba(0, 0, 0, .75)),
+                url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600');
 
-background:
-linear-gradient(rgba(0,0,0,.75),
-rgba(0,0,0,.75)),
-url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
 
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
+            color: white;
+        }
 
-color:white;
-}
+        .glass {
+            background: rgba(255, 255, 255, .06);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, .08);
+        }
 
-.glass{
-background:rgba(255,255,255,.06);
-backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,.08);
-}
+        .active-menu {
+            background: linear-gradient(135deg, #6f4e37, #b08968);
+        }
 
-.active-menu{
-background:linear-gradient(135deg,#6f4e37,#b08968);
-}
+        input {
+            background: rgba(255, 255, 255, .05);
+        }
 
-input{
-background:rgba(255,255,255,.05);
-}
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
 
-</style>
+        ::-webkit-scrollbar-thumb {
+            background: #b08968;
+            border-radius: 20px;
+        }
+    </style>
 
 </head>
 
 <body>
 
-<aside class="fixed top-0 left-0 w-64 h-screen glass border-r border-white/10">
+    <!-- Mobile Menu Button -->
 
-<div class="p-6 border-b border-white/10">
+    <button id="menuBtn" class="fixed top-5 left-5 z-[70]
+md:hidden glass p-3 rounded-xl">
 
-<img src="{{ url_for('static', filename='images/logo.png') }}"
-class="h-16">
+        <i class="fa-solid fa-bars text-xl"></i>
 
-</div>
-
-<nav class="p-4 space-y-3">
-
-<a href="/admin"
-class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10">
-<i class="fa-solid fa-chart-line"></i>
-Dashboard
-</a>
-
-<a href="/manage-products"
-class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10">
-<i class="fa-solid fa-mug-hot"></i>
-Products
-</a>
-
-<a href="/orders"
-class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10">
-<i class="fa-solid fa-box"></i>
-Orders
-</a>
-
-<a href="/users"
-class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10">
-<i class="fa-solid fa-users"></i>
-Users
-</a>
-
-<a href="/analytics"
-class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10">
-<i class="fa-solid fa-chart-pie"></i>
-Analytics
-</a>
-
-<a href="/settings"
-class="active-menu flex items-center gap-3 p-4 rounded-xl">
-<i class="fa-solid fa-gear"></i>
-Settings
-</a>
-
-<a href="/logout"
-class="flex items-center gap-3 p-4 rounded-xl hover:bg-red-500">
-<i class="fa-solid fa-right-from-bracket"></i>
-Logout
-</a>
-
-</nav>
-
-</aside>
+    </button>
 
 
-<div class="ml-64 p-8">
+    <!-- Overlay -->
 
-<h1 class="text-6xl font-bold mb-10">
-⚙️ Settings
-</h1>
+    <div id="overlay" class="fixed inset-0 bg-black/60 z-40 hidden">
+    </div>
 
-<div class="glass p-10 rounded-3xl max-w-4xl">
 
-<form>
+    <!-- Sidebar -->
 
-<div class="mb-6">
+    <aside id="sidebar" class="fixed top-0 left-0 h-screen w-64 glass
+border-r border-white/10 z-50
 
-<label class="block mb-2">
-Admin Name
-</label>
+overflow-y-auto
 
-<input type="text"
-placeholder="Masud Rana Nayeem"
-class="w-full p-4 rounded-xl outline-none">
+transform -translate-x-full md:translate-x-0
+transition-all duration-300 ease-in-out">
 
-</div>
+        <div class="p-6 border-b border-white/10">
 
-<div class="mb-6">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="h-16 w-auto object-contain">
 
-<label class="block mb-2">
-Email
-</label>
+        </div>
 
-<input type="email"
-placeholder="admin@gmail.com"
-class="w-full p-4 rounded-xl outline-none">
+        <nav class="p-4 space-y-3">
 
-</div>
+            <a href="/admin" class="flex items-center gap-3 p-4 rounded-xl">
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+            </a>
 
-<div class="mb-6">
+            <a href="/manage-products" class="flex items-center gap-3 p-4 rounded-xl
+            hover:bg-white/10 duration-300 hover:translate-x-2">
 
-<label class="block mb-2">
-New Password
-</label>
+                <i class="fa-solid fa-mug-hot"></i>
+                Products
 
-<input type="password"
-placeholder="********"
-class="w-full p-4 rounded-xl outline-none">
+            </a>
 
-</div>
+            <a href="/orders" class="flex items-center gap-3 p-4 rounded-xl
+            hover:bg-white/10 duration-300 hover:translate-x-2">
 
-<div class="mb-8">
+                <i class="fa-solid fa-box"></i>
+                Orders
 
-<label class="block mb-2">
-Profile Picture
-</label>
+            </a>
 
-<input type="file"
-class="w-full p-4 rounded-xl">
+            <a href="/users" class="flex items-center gap-3 p-4 rounded-xl
+            hover:bg-white/10 duration-300 hover:translate-x-2">
 
-</div>
+                <i class="fa-solid fa-users"></i>
+                Users
 
-<button
-class="bg-gradient-to-r
+            </a>
+
+            <a href="/analytics" class="flex items-center gap-3 p-4 rounded-xl
+            hover:bg-white/10 duration-300 hover:translate-x-2">
+
+                <i class="fa-solid fa-chart-pie"></i>
+                Analytics
+
+            </a>
+
+            <a href="/settings" class="active-menu flex items-center gap-3 p-4 rounded-xl
+            hover:bg-white/10 duration-300 hover:translate-x-2">
+
+                <i class="fa-solid fa-gear"></i>
+                Settings
+
+            </a>
+
+            <a href="/logout" class="flex items-center gap-3 p-4 rounded-xl
+            hover:bg-red-500 duration-300">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <div id="mainContent" class="transition-all duration-300
+p-6 md:p-8
+md:ml-64">
+
+        <h1 class="text-6xl font-bold mb-10">
+            ⚙️ Settings
+        </h1>
+
+        <div class="glass p-10 rounded-3xl max-w-4xl">
+
+            <form>
+
+                <div class="mb-6">
+
+                    <label class="block mb-2">
+                        Admin Name
+                    </label>
+
+                    <input type="text" placeholder="Masud Rana Nayeem" class="w-full p-4 rounded-xl outline-none">
+
+                </div>
+
+                <div class="mb-6">
+
+                    <label class="block mb-2">
+                        Email
+                    </label>
+
+                    <input type="email" placeholder="admin@gmail.com" class="w-full p-4 rounded-xl outline-none">
+
+                </div>
+
+                <div class="mb-6">
+
+                    <label class="block mb-2">
+                        New Password
+                    </label>
+
+                    <input type="password" placeholder="********" class="w-full p-4 rounded-xl outline-none">
+
+                </div>
+
+                <div class="mb-8">
+
+                    <label class="block mb-2">
+                        Profile Picture
+                    </label>
+
+                    <input type="file" class="w-full p-4 rounded-xl">
+
+                </div>
+
+                <button class="bg-gradient-to-r
 from-[#6f4e37]
 to-[#b08968]
 px-10 py-4 rounded-2xl">
 
-Save Changes
+                    Save Changes
 
-</button>
+                </button>
 
-</form>
+            </form>
 
-</div>
+        </div>
 
-</div>
+    </div>
+    <script>
 
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const mainContent = document.getElementById('mainContent');
+
+        let isOpen = window.innerWidth >= 768;
+
+        // Desktop Default
+
+        if (window.innerWidth >= 768) {
+
+            sidebar.classList.remove('-translate-x-full');
+            mainContent.classList.add('md:ml-64');
+
+        }
+
+        // Toggle Sidebar
+
+        menuBtn.addEventListener('click', () => {
+
+            if (window.innerWidth < 768) {
+
+                sidebar.classList.toggle('-translate-x-full');
+                overlay.classList.toggle('hidden');
+
+            } else {
+
+                if (isOpen) {
+
+                    sidebar.classList.add('-translate-x-full');
+                    mainContent.classList.remove('md:ml-64');
+
+                } else {
+
+                    sidebar.classList.remove('-translate-x-full');
+                    mainContent.classList.add('md:ml-64');
+
+                }
+
+                isOpen = !isOpen;
+            }
+
+        });
+
+        // Close Sidebar when clicking overlay
+
+        overlay.addEventListener('click', () => {
+
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+
+        });
+
+        // Auto Adjust on Resize
+
+        window.addEventListener('resize', () => {
+
+            if (window.innerWidth >= 768) {
+
+                overlay.classList.add('hidden');
+                sidebar.classList.remove('-translate-x-full');
+                mainContent.classList.add('md:ml-64');
+
+            } else {
+
+                sidebar.classList.add('-translate-x-full');
+                mainContent.classList.remove('md:ml-64');
+
+            }
+
+        });
+
+    </script>
 </body>
+
 </html>
