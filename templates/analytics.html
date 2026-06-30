@@ -17,8 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <style>
         * {
@@ -27,8 +26,8 @@
 
         body {
             background:
-                linear-gradient(rgba(0,0,0,.75),
-                rgba(0,0,0,.75)),
+                linear-gradient(rgba(0, 0, 0, .75),
+                    rgba(0, 0, 0, .75)),
                 url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600');
 
             background-size: cover;
@@ -38,14 +37,23 @@
             color: white;
         }
 
-        .glass{
-            background: rgba(255,255,255,.06);
+        .glass {
+            background: rgba(255, 255, 255, .06);
             backdrop-filter: blur(20px);
-            border:1px solid rgba(255,255,255,.08);
+            border: 1px solid rgba(255, 255, 255, .08);
         }
 
-        .active-menu{
-            background: linear-gradient(135deg,#6f4e37,#b08968);
+        .active-menu {
+            background: linear-gradient(135deg, #6f4e37, #b08968);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #b08968;
+            border-radius: 20px;
         }
     </style>
 
@@ -53,59 +61,91 @@
 
 <body>
 
+    <!-- Mobile Menu Button -->
+
+    <button id="menuBtn" class="fixed top-5 left-5 z-[70]
+md:hidden glass p-3 rounded-xl">
+
+        <i class="fa-solid fa-bars text-xl"></i>
+
+    </button>
+
+
+    <!-- Overlay -->
+
+    <div id="overlay" class="fixed inset-0 bg-black/60 z-40 hidden">
+    </div>
+
+
     <!-- Sidebar -->
 
-    <aside class="fixed top-0 left-0 w-64 h-screen glass border-r border-white/10 z-50">
+    <aside id="sidebar" class="fixed top-0 left-0 h-screen w-64 glass
+border-r border-white/10 z-50
+
+overflow-y-auto
+
+transform -translate-x-full md:translate-x-0
+transition-all duration-300 ease-in-out">
 
         <div class="p-6 border-b border-white/10">
 
-            <img src="{{ url_for('static', filename='images/logo.png') }}"
-                class="h-16">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="h-16 w-auto object-contain">
 
         </div>
 
         <nav class="p-4 space-y-3">
 
-            <a href="/admin"
-                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10">
+            <a href="/admin" class="flex items-center gap-3 p-4 rounded-xl">
                 <i class="fa-solid fa-chart-line"></i>
                 Dashboard
             </a>
 
-            <a href="/manage-products"
-                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10">
+            <a href="/manage-products" class="flex items-center gap-3 p-4 rounded-xl
+            hover:bg-white/10 duration-300 hover:translate-x-2">
+
                 <i class="fa-solid fa-mug-hot"></i>
                 Products
+
             </a>
 
-            <a href="/orders"
-                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10">
+            <a href="/orders" class="flex items-center gap-3 p-4 rounded-xl
+            hover:bg-white/10 duration-300 hover:translate-x-2">
+
                 <i class="fa-solid fa-box"></i>
                 Orders
+
             </a>
 
-            <a href="/users"
-                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10">
+            <a href="/users" class="flex items-center gap-3 p-4 rounded-xl
+            hover:bg-white/10 duration-300 hover:translate-x-2">
+
                 <i class="fa-solid fa-users"></i>
                 Users
+
             </a>
 
-            <a href="/analytics"
-                class="active-menu flex items-center gap-3 p-4 rounded-xl">
+            <a href="/analytics" class="active-menu flex items-center gap-3 p-4 rounded-xl
+            hover:bg-white/10 duration-300 hover:translate-x-2">
+
                 <i class="fa-solid fa-chart-pie"></i>
                 Analytics
+
             </a>
 
-            <a href="/settings"
-                class="flex items-center gap-3 p-4 rounded-xl hover:bg-white/10">
+            <a href="/settings" class="flex items-center gap-3 p-4 rounded-xl
+            hover:bg-white/10 duration-300 hover:translate-x-2">
+
                 <i class="fa-solid fa-gear"></i>
                 Settings
+
             </a>
 
-            <a href="/logout"
-                class="flex items-center gap-3 p-4 rounded-xl hover:bg-red-500">
+            <a href="/logout" class="flex items-center gap-3 p-4 rounded-xl
+            hover:bg-red-500 duration-300">
+
                 <i class="fa-solid fa-right-from-bracket"></i>
                 Logout
+
             </a>
 
         </nav>
@@ -113,7 +153,9 @@
     </aside>
 
 
-    <div class="ml-64 p-8">
+    <div id="mainContent" class="transition-all duration-300
+p-6 md:p-8
+md:ml-64">
 
         <h1 class="text-6xl font-bold mb-3">
             📊 Analytics
@@ -162,41 +204,116 @@
     </div>
 
 
-<script>
+    <script>
 
-new Chart(document.getElementById('salesChart'),{
+        new Chart(document.getElementById('salesChart'), {
 
-type:'line',
+            type: 'line',
 
-data:{
+            data: {
 
-labels:['Jan','Feb','Mar','Apr','May','Jun','Jul'],
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
 
-datasets:[{
+                datasets: [{
 
-label:'Sales ($)',
+                    label: 'Sales ($)',
 
-data:[1200,2500,1800,4000,3000,5500,7000],
+                    data: [1200, 2500, 1800, 4000, 3000, 5500, 7000],
 
-borderColor:'#b08968',
+                    borderColor: '#b08968',
 
-backgroundColor:'rgba(176,137,104,.3)',
+                    backgroundColor: 'rgba(176,137,104,.3)',
 
-fill:true,
+                    fill: true,
 
-tension:.4
+                    tension: .4
 
-}]
+                }]
 
-},
+            },
 
-options:{
-responsive:true
-}
+            options: {
+                responsive: true
+            }
 
-});
+        });
 
-</script>
+    </script>
+    <script>
 
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const mainContent = document.getElementById('mainContent');
+
+        let isOpen = window.innerWidth >= 768;
+
+        // Desktop Default
+
+        if (window.innerWidth >= 768) {
+
+            sidebar.classList.remove('-translate-x-full');
+            mainContent.classList.add('md:ml-64');
+
+        }
+
+        // Toggle Sidebar
+
+        menuBtn.addEventListener('click', () => {
+
+            if (window.innerWidth < 768) {
+
+                sidebar.classList.toggle('-translate-x-full');
+                overlay.classList.toggle('hidden');
+
+            } else {
+
+                if (isOpen) {
+
+                    sidebar.classList.add('-translate-x-full');
+                    mainContent.classList.remove('md:ml-64');
+
+                } else {
+
+                    sidebar.classList.remove('-translate-x-full');
+                    mainContent.classList.add('md:ml-64');
+
+                }
+
+                isOpen = !isOpen;
+            }
+
+        });
+
+        // Close Sidebar when clicking overlay
+
+        overlay.addEventListener('click', () => {
+
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+
+        });
+
+        // Auto Adjust on Resize
+
+        window.addEventListener('resize', () => {
+
+            if (window.innerWidth >= 768) {
+
+                overlay.classList.add('hidden');
+                sidebar.classList.remove('-translate-x-full');
+                mainContent.classList.add('md:ml-64');
+
+            } else {
+
+                sidebar.classList.add('-translate-x-full');
+                mainContent.classList.remove('md:ml-64');
+
+            }
+
+        });
+
+    </script>
 </body>
+
 </html>
