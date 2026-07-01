@@ -1,446 +1,523 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>My Profile | CafeVerse</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CafeVerse · My Profile</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+        /* base & reset */
+        * { 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
         }
-
         body {
-
-            background:
-                linear-gradient(rgba(0, 0, 0, .55),
-                    rgba(0, 0, 0, .55)),
-                url('/static/images/dashboard-2.avif');
-
+            background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.75)), url('/static/images/coffee2.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-        }
-
-        /* Sidebar */
-
-  .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 260px;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 25px;
-            color: white;
-
-
-        }
-        .logo {
-
-            font-size: 30px;
-
-            font-weight: 700;
-
-            margin-bottom: 40px;
-        }
-
-        .sidebar ul {
-            list-style: none;
-        }
-
-        .sidebar ul li {
-            margin: 20px 0;
-        }
-
-        .sidebar ul li a {
-
-            display: flex;
-            align-items: center;
-
-            gap: 10px;
-
-            padding: 14px 18px;
-
-            border-radius: 12px;
-
-            transition: .3s;
-
-            color: white;
-
-            text-decoration: none;
-        }
-
-        .sidebar ul li a:hover {
-
-            background: rgba(255, 255, 255, .12);
-
-            transform: translateX(8px);
-        }
-
-        /* Main Content */
-
-        .main {
-
-            margin-left: 260px;
-
             min-height: 100vh;
-
-            padding: 40px;
-
+            color: #f5efe8;
+            transition: background 0.3s, color 0.3s;
         }
-
-        .content {
-
-            max-width: 1000px;
-
-            margin: auto;
+        /* glassmorphism base */
+        .glass {
+            background: rgba(255,255,255,.05);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,.08);
         }
-
+        /* card hover effect */
+        .card-hover {
+            transition: .4s;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(190, 130, 90, .25);
+        }
+        /* active menu item */
+        .active-menu {
+            background: linear-gradient(135deg, #6f4e37, #b08968);
+        }
+        /* sidebar scroll */
+        #sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+        #sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #sidebar::-webkit-scrollbar-thumb {
+            background: #b08968;
+            border-radius: 20px;
+        }
+        #sidebar::-webkit-scrollbar-thumb:hover {
+            background: #6f4e37;
+        }
+        /* light mode */
+        .light-mode {
+            background: url("/static/images/dashboard_white_bg.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #2d2d2d;
+        }
+        .light-mode .active-menu {
+            background: linear-gradient(135deg, #8B5E3C, #C89B6D);
+            color: white;
+        }
+        .light-mode .glass {
+            background: rgba(255, 255, 255, .6);
+            backdrop-filter: blur(12px);
+            border-color: rgba(0, 0, 0, .08);
+        }
+        .light-mode .card-hover:hover {
+            box-shadow: 0 25px 50px rgba(0, 0, 0, .15);
+        }
+        .light-mode .text-gray-300 {
+            color: #4a4a4a;
+        }
+        .light-mode .text-gray-400 {
+            color: #555;
+        }
+        .light-mode h1,
+        .light-mode h2,
+        .light-mode h3 {
+            color: #1e1e1e;
+        }
+        .light-mode .bg-black\/60 {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .light-mode .border-white\/10 {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        .light-mode .text-white {
+            color: #1e1e1e;
+        }
+        .light-mode .text-gray-200 {
+            color: #333;
+        }
+        .light-mode .bg-gradient-to-r {
+            background: linear-gradient(135deg, #8B5E3C, #C89B6D);
+            color: white;
+        }
+        .light-mode .profile-card {
+            background: rgba(255,255,255,.9);
+            border-color: rgba(0,0,0,.1);
+        }
+        .light-mode .profile-card h2 {
+            color: #3e2c21;
+        }
+        .light-mode .profile-card p {
+            color: #555;
+        }
+        .light-mode .stat-card {
+            background: rgba(255,255,255,.9);
+            border-color: rgba(0,0,0,.1);
+        }
+        .light-mode .stat-card h3 {
+            color: #3e2c21;
+        }
+        .light-mode .stat-card h1 {
+            color: #6f4e37;
+        }
+        .light-mode .history {
+            background: rgba(255,255,255,.9);
+            border-color: rgba(0,0,0,.1);
+        }
+        .light-mode .history h2 {
+            color: #3e2c21;
+        }
+        .light-mode .order-item {
+            border-color: #ddd;
+        }
+        .light-mode .order-item span {
+            color: #333;
+        }
+        /* profile card */
         .profile-card {
-
-            width: 100%;
-
-            max-width: 600px;
-
+            background: rgba(255,255,255,.08);
+            backdrop-filter: blur(4px);
+            border-radius: 30px;
+            padding: 45px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,.06);
+            max-width: 500px;
             margin: 0 auto 40px auto;
         }
-
-        .stats-container {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(auto-fit, minmax(220px, 1fr));
-
-            gap: 20px;
-
-            margin-bottom: 40px;
-        }
-
-        .history {
-
-            width: 100%;
-        }
-
-        .profile-card {
-
-            width: 500px;
-
-            background: rgba(255, 255, 255, .95);
-
-            backdrop-filter: blur(10px);
-
-            padding: 45px;
-
-            border-radius: 25px;
-
-            text-align: center;
-
-            box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
-
-            animation: fadeIn 1s ease;
-        }
-
-        .stats-container {
-
-
-            margin-top: 40px;
-
-            display: grid;
-
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-
-            gap: 20px;
-
-        }
-
-        .stat-card {
-
-            background: rgba(255, 255, 255, .95);
-
-            padding: 25px;
-
-            border-radius: 20px;
-
-            text-align: center;
-
-            box-shadow: 0 5px 20px rgba(0, 0, 0, .15);
-
-            transition: .3s;
-
-        }
-
-        .stat-card:hover {
-
-
-            transform: translateY(-8px);
-
-            box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
-
-
-        }
-
-        .stat-card h3 {
-
-            color: #3e2c21;
-
-            margin-bottom: 15px;
-
-        }
-
-        .stat-card h1 {
-
-            color: #6f4e37;
-
-            font-size: 45px;
-
-        }
-
-        .history {
-
-
-            margin-top: 40px;
-
-            background: rgba(255, 255, 255, .95);
-
-            padding: 30px;
-
-            border-radius: 20px;
-
-            box-shadow: 0 5px 20px rgba(0, 0, 0, .15);
-
-        }
-
-        .history h2 {
-
-            color: #3e2c21;
-
-            margin-bottom: 20px;
-
-        }
-
-        .order-item {
-
-
-            padding: 15px;
-
-            border-bottom: 1px solid #ddd;
-
-            display: flex;
-
-            justify-content: space-between;
-
-        }
-
-        .favorite {
-
-
-            color: #b8860b;
-
-            font-weight: bold;
-        }
-
-
-
-        @keyframes fadeIn {
-
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .profile-card img {
-
             width: 170px;
             height: 170px;
-
             border-radius: 50%;
-
             object-fit: cover;
-
-            border: 5px solid #3e2c21;
-
+            border: 5px solid #b08968;
             margin-bottom: 25px;
         }
-
         .profile-card h2 {
-
-            color: #3e2c21;
-
+            color: #f0e3d8;
             margin-bottom: 15px;
+            font-weight: 600;
         }
-
         .profile-card p {
-
-            color: #666;
-
+            color: #ccc;
             margin: 15px 0;
-
             font-size: 18px;
+            font-weight: 300;
         }
-
-        .btn {
-
+        .profile-card .email-icon {
+            color: #b08968;
+            margin-right: 10px;
+        }
+        .edit-btn {
             display: inline-block;
-
             margin-top: 25px;
-
-            padding: 14px 30px;
-
-            background: #3e2c21;
-
+            padding: 14px 35px;
+            background: linear-gradient(135deg, #6f4e37, #b08968);
             color: white;
-
             text-decoration: none;
-
-            border-radius: 12px;
-
+            border-radius: 40px;
+            transition: .3s;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+        }
+        .edit-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(190, 130, 90, .3);
+        }
+        /* stat cards */
+        .stat-card {
+            background: rgba(255,255,255,.08);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,.06);
             transition: .3s;
         }
-
-        .btn:hover {
-
-            background: #6f4e37;
-
-            transform: translateY(-3px);
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,.2);
+        }
+        .stat-card h3 {
+            color: #ccc;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+        .stat-card h1 {
+            color: #d4a373;
+            font-size: 45px;
+            font-weight: 700;
+        }
+        .stat-card .stat-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        /* history */
+        .history {
+            background: rgba(255,255,255,.08);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,.06);
+            margin-top: 40px;
+        }
+        .history h2 {
+            color: #f0e3d8;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .order-item {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: .3s;
+        }
+        .order-item:hover {
+            background: rgba(255,255,255,.05);
+            border-radius: 10px;
+            padding-left: 20px;
+        }
+        .order-item span {
+            color: #ccc;
+            font-weight: 300;
+        }
+        .order-item .order-price {
+            color: #d4a373;
+            font-weight: 600;
+        }
+        .order-item .favorite {
+            color: #ffd700;
+            font-weight: 600;
+        }
+        .order-item .order-status {
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+        /* overlay */
+        #overlay { transition: opacity 0.2s; }
+        /* responsive */
+        @media (max-width: 768px) {
+            .profile-card {
+                padding: 30px 20px;
+            }
+            .stats-container {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .order-item {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+        /* stats grid */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
     </style>
-
-
 </head>
-
 <body>
 
+    <!-- mobile menu button -->
+    <button id="menuBtn" class="fixed top-5 left-5 z-[60] lg:hidden glass p-3 rounded-xl text-white hover:bg-white/10 transition">
+        <i class="fa-solid fa-bars text-xl"></i>
+    </button>
 
-    <!-- Sidebar -->
-
-    <div class="sidebar">
-
-        <div class="logo">
-            🍵 CafeVerse
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="fixed top-0 left-0 w-72 h-screen glass z-50 
+        transform -translate-x-full lg:translate-x-0 
+        transition-transform duration-300 ease-in-out
+        overflow-y-auto overflow-x-hidden text-white
+        flex flex-col">
+        
+        <div class="p-8 border-b border-white/10 flex-shrink-0">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="CafeVerse" class="h-16 w-auto" />
         </div>
 
-        <ul>
-
-            <li><a href="/dashboard">🏠 Dashboard</a></li>
-
-            <li><a href="/menu">☕ Menu</a></li>
-
-            <li><a href="/cart">🛒 My Cart</a></li>
-
-            <li><a href="/profile">👤 Profile</a></li>
-
-            <li><a href="/logout">🚪 Logout</a></li>
-
-        </ul>
-
-    </div>
-
-    <!-- Main -->
-    <div class="content">
-
-
-        <div class="main">
-
-            <div class="profile-card">
-
-                {% if user[4] %}
-
-                <img src="/static/uploads/{{ user[4] }}">
-
-                {% else %}
-
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
-
+        <nav class="p-5 space-y-3 pb-20 flex-1">
+            <a href="/dashboard" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+                <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+            <a href="/menu" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+                <i class="fa-solid fa-mug-hot"></i> Menu
+            </a>
+            <a href="/cart" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+                <i class="fa-solid fa-cart-shopping"></i> My Cart
+                {% if cart_count %}
+                <span class="ml-auto bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center">
+                    {{ cart_count }}
+                </span>
                 {% endif %}
+            </a>
+            <a href="/profile" class="active-menu flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+                <i class="fa-solid fa-user"></i> Profile
+            </a>
+            <a href="/logout" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-red-500/70 duration-300 transition">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+            <button id="themeToggle" class="glass w-14 h-14 rounded-2xl flex items-center justify-center text-xl hover:bg-white/10 transition">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </nav>
+    </aside>
 
-                <h2>{{ user[1] }}</h2>
+    <!-- overlay (mobile) -->
+    <div id="overlay" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden"></div>
 
-                <p><strong>Email:</strong> {{ user[2] }}</p>
+    <!-- MAIN CONTENT -->
+    <div class="lg:ml-72 p-6 lg:p-10 transition-all duration-300">
 
-                <a href="/edit-profile" class="btn">
-                    Edit Profile
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- Header -->
+            <div class="flex items-center gap-4 mb-10">
+                <div class="glass p-4 rounded-2xl">
+                    <i class="fa-solid fa-user text-3xl text-amber-400"></i>
+                </div>
+                <div>
+                    <h1 class="text-4xl lg:text-5xl font-extrabold text-white">My Profile</h1>
+                    <p class="text-gray-300 text-lg mt-1">Manage your account and preferences</p>
+                </div>
+            </div>
+
+            <!-- Profile Card -->
+            <div class="profile-card glass card-hover">
+                {% if user[4] %}
+                <img src="/static/uploads/{{ user[4] }}" alt="{{ user[1] }}" />
+                {% else %}
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Default Avatar" />
+                {% endif %}
+                <h2><i class="fa-regular fa-user mr-2 text-amber-400"></i>{{ user[1] }}</h2>
+                <p><i class="fa-regular fa-envelope email-icon"></i><strong>Email:</strong> {{ user[2] }}</p>
+                <p><i class="fa-regular fa-calendar email-icon"></i><strong>Member Since:</strong> {{ user[5] if user[5] else 'January 2024' }}</p>
+                <a href="/edit-profile" class="edit-btn">
+                    <i class="fa-regular fa-pen-to-square mr-2"></i> Edit Profile
                 </a>
-
             </div>
 
-
-
+            <!-- Statistics -->
             <div class="stats-container">
-
-
-                <div class="stat-card">
+                <div class="stat-card card-hover">
+                    <span class="stat-icon">🛒</span>
                     <h3>Total Orders</h3>
-                    <h1>12</h1>
+                    <h1>{{ total_orders if total_orders else 12 }}</h1>
                 </div>
-
-                <div class="stat-card">
+                <div class="stat-card card-hover">
+                    <span class="stat-icon">⭐</span>
                     <h3>Reward Points</h3>
-                    <h1>320</h1>
+                    <h1>{{ reward_points if reward_points else 320 }}</h1>
                 </div>
-
-                <div class="stat-card">
+                <div class="stat-card card-hover">
+                    <span class="stat-icon">❤️</span>
                     <h3>Favorite Drinks</h3>
-                    <h1>5</h1>
+                    <h1>{{ favorite_drinks if favorite_drinks else 5 }}</h1>
                 </div>
-
-                <div class="stat-card">
+                <div class="stat-card card-hover">
+                    <span class="stat-icon">📦</span>
                     <h3>Cart Items</h3>
-                    <h1>3</h1>
+                    <h1>{{ cart_count if cart_count else 3 }}</h1>
                 </div>
-
             </div>
 
+            <!-- Order History -->
             <div class="history">
-
-                <h2>📜 Order History</h2>
-
-                <div class="order-item">
-                    <span>Cappuccino</span>
-                    <span>$5.99</span>
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl"><i class="fa-solid fa-clock-rotate-left mr-3 text-amber-400"></i>Order History</h2>
+                    <a href="/orders" class="text-amber-400 hover:text-amber-300 transition text-sm">
+                        View All <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </a>
                 </div>
 
-                <div class="order-item">
-                    <span>Green Tea Latte</span>
-                    <span>$4.50</span>
-                </div>
-
-                <div class="order-item">
-                    <span>Espresso</span>
-                    <span>$3.99</span>
-                </div>
-
-                <div class="order-item">
-                    <span class="favorite">
-                        ⭐ Favorite Drink: Cappuccino
-                    </span>
-                </div>
-
-
+                {% if order_history %}
+                    {% for order in order_history %}
+                    <div class="order-item">
+                        <span><i class="fa-solid fa-mug-hot mr-2 text-amber-400"></i>{{ order[1] }}</span>
+                        <span class="order-price">${{ "%.2f"|format(order[2]) }}</span>
+                        <span class="order-status">{{ order[3] if order[3] else 'Completed' }}</span>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="order-item">
+                        <span><i class="fa-solid fa-mug-hot mr-2 text-amber-400"></i>Cappuccino</span>
+                        <span class="order-price">$5.99</span>
+                        <span class="order-status">Completed</span>
+                    </div>
+                    <div class="order-item">
+                        <span><i class="fa-solid fa-mug-hot mr-2 text-amber-400"></i>Green Tea Latte</span>
+                        <span class="order-price">$4.50</span>
+                        <span class="order-status">Completed</span>
+                    </div>
+                    <div class="order-item">
+                        <span><i class="fa-solid fa-mug-hot mr-2 text-amber-400"></i>Espresso</span>
+                        <span class="order-price">$3.99</span>
+                        <span class="order-status">Pending</span>
+                    </div>
+                    <div class="order-item">
+                        <span><i class="fa-solid fa-mug-hot mr-2 text-amber-400"></i>Caramel Macchiato</span>
+                        <span class="order-price">$6.49</span>
+                        <span class="order-status">Completed</span>
+                    </div>
+                    <div class="order-item border-b-0">
+                        <span class="favorite"><i class="fa-solid fa-star mr-2"></i>Favorite Drink: Cappuccino</span>
+                        <span class="favorite">⭐ 5.0</span>
+                    </div>
+                {% endif %}
             </div>
-
 
         </div>
-
     </div>
-</body>
 
+    <script>
+        (function() {
+        "use strict";
+
+        // DOM elements
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const themeToggle = document.getElementById('themeToggle');
+
+        // -------- SIDEBAR TOGGLE (mobile) --------
+        function toggleSidebar(forceState) {
+            const isHidden = sidebar.classList.contains('-translate-x-full');
+            if (forceState === 'open') {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else if (forceState === 'close') {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            } else {
+                if (isHidden) {
+                    sidebar.classList.remove('-translate-x-full');
+                    overlay.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            }
+        }
+
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleSidebar();
+        });
+
+        overlay.addEventListener('click', function() {
+            toggleSidebar('close');
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+                toggleSidebar('close');
+            }
+        });
+
+        const mediaQuery = window.matchMedia('(min-width: 1024px)');
+        function handleLgChange(e) {
+            if (e.matches) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+        mediaQuery.addEventListener('change', handleLgChange);
+        handleLgChange(mediaQuery);
+
+        // -------- THEME TOGGLE --------
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            const icon = this.querySelector('i');
+            if (document.body.classList.contains('light-mode')) {
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+            }
+        });
+
+        console.log('CafeVerse profile ready');
+        })();
+    </script>
+
+</body>
 </html>
