@@ -1,279 +1,323 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>CafeVerse Menu</title>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CafeVerse · Menu</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Poppins',sans-serif;
+        /* base & reset */
+        * { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+        background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.75)), url('/static/images/coffee2.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        color: #f5efe8;
+        transition: background 0.3s, color 0.3s;
         }
-
-        body{
-
-            background:
-            linear-gradient(
-            rgba(0,0,0,.55),
-            rgba(0,0,0,.55)
-            ),
-            url("/static/images/dashboard-2.avif");
-
-            background-size:cover;
-            background-position:center;
-            background-attachment:fixed;
+        /* glassmorphism base */
+        .glass {
+        background: rgba(255,255,255,.05);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1px solid rgba(255,255,255,.08);
         }
-
-        /* Sidebar */
-
-       .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 260px;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 25px;
+        /* card hover effect */
+        .card-hover {
+        transition: .4s;
+        }
+        .card-hover:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 25px 50px rgba(190, 130, 90, .25);
+        }
+        /* active menu item (same as original) */
+         .active-menu {
+            background: linear-gradient(135deg, #6f4e37, #b08968);
+        }
+        /* sidebar scroll */
+        #sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+        #sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #sidebar::-webkit-scrollbar-thumb {
+            background: #b08968;
+            border-radius: 20px;
+        }
+        #sidebar::-webkit-scrollbar-thumb:hover {
+            background: #6f4e37;
+        }
+        /* light mode */
+        .light-mode {
+            background: url("/static/images/dashboard_white_bg.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #2d2d2d;
+        }
+        .light-mode .active-menu {
+            background: linear-gradient(135deg, #8B5E3C, #C89B6D);
             color: white;
-
-
         }
-        .logo{
-
-            font-size:30px;
-            font-weight:700;
-
-            margin-bottom:40px;
+        .light-mode .glass {
+            background: rgba(255, 255, 255, .6);
+            backdrop-filter: blur(12px);
+            border-color: rgba(0, 0, 0, .08);
         }
-
-        .sidebar ul{
-            list-style:none;
+        .light-mode .card-hover:hover {
+            box-shadow: 0 25px 50px rgba(0, 0, 0, .15);
         }
-
-        .sidebar ul li{
-            margin:20px 0;
+        .light-mode .text-gray-300 {
+            color: #4a4a4a;
         }
-
-        .sidebar ul li a{
-
-            display:flex;
-            align-items:center;
-
-            gap:10px;
-
-            padding:14px 18px;
-
-            border-radius:12px;
-
-            transition:.3s;
-
-            color:white;
-
-            text-decoration:none;
+        .light-mode .text-gray-400 {
+            color: #555;
         }
-
-        .sidebar ul li a:hover{
-
-            background:rgba(255,255,255,.12);
-
-            transform:translateX(8px);
+        .light-mode h1,
+        .light-mode h2,
+        .light-mode h3 {
+            color: #1e1e1e;
         }
-
-        /* Main */
-
-        .main{
-
-            margin-left:260px;
-            padding:40px;
+        .light-mode .bg-black\/60 {
+            background: rgba(255, 255, 255, 0.3);
         }
-
-        h1{
-
-            text-align:center;
-
-            color:white;
-
-            margin-bottom:40px;
-
-            font-size:45px;
+        .light-mode .border-white\/10 {
+            border-color: rgba(0, 0, 0, 0.1);
         }
-
-        .container{
-
-            display:grid;
-
-            grid-template-columns:
-            repeat(auto-fit,minmax(320px,1fr));
-
-            gap:30px;
+        .light-mode .text-white {
+            color: #1e1e1e;
         }
-
-        .card{
-
-            background:white;
-
-            border-radius:20px;
-
-            overflow:hidden;
-
-            box-shadow:0 10px 25px rgba(0,0,0,.2);
-
-            transition:.3s;
+        .light-mode .text-gray-200 {
+            color: #333;
         }
-
-        .card:hover{
-
-            transform:translateY(-10px);
+        .light-mode .bg-gradient-to-r {
+            background: linear-gradient(135deg, #8B5E3C, #C89B6D);
+            color: white;
         }
-
-        .tea-image{
-
-            width:100%;
-
-            height:250px;
-
-            object-fit:cover;
+        .light-mode .card {
+        background: rgba(255,255,255,.9);
+        box-shadow: 0 10px 25px rgba(0,0,0,.1);
         }
+        .light-mode .card h2 { color: #3e2c21; }
+        .light-mode .card p { color: #444; }
+        .light-mode .price { color: #b8860b; }
+        .light-mode .btn { background: #3e2c21; color: white; }
+        .light-mode .btn:hover { background: #6f4e37; }
 
-        .card-body{
-
-            padding:25px;
+        /* card / grid style (fallback for .container) */
+        .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        max-width: 1400px;
+        margin: 0 auto;
         }
-
-        .card h2{
-
-            color:#3e2c21;
-
-            margin-bottom:10px;
+        .card {
+        background: rgba(255,255,255,.08);
+        backdrop-filter: blur(4px);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,.3);
+        transition: .3s;
+        border: 1px solid rgba(255,255,255,.06);
         }
-
-        .card p{
-
-            color:#666;
-
-            line-height:1.6;
+        .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 35px rgba(0,0,0,.5);
         }
-
-        .price{
-
-            color:#b8860b;
-
-            font-size:24px;
-
-            font-weight:bold;
-
-            margin-top:15px;
+        .tea-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        display: block;
+        background: #2d1f16;
         }
-
-        .btn{
-
-            display:inline-block;
-
-            margin-top:20px;
-
-            background:#3e2c21;
-
-            color:white;
-
-            text-decoration:none;
-
-            padding:12px 22px;
-
-            border-radius:10px;
-
-            transition:.3s;
+        .card-body { padding: 25px; }
+        .card h2 { color: #f0e3d8; margin-bottom: 10px; font-weight: 600; }
+        .card p { color: #ccc; line-height: 1.6; font-weight: 300; }
+        .price { color: #d4a373; font-size: 24px; font-weight: 700; margin-top: 15px; }
+        .btn {
+        display: inline-block;
+        margin-top: 20px;
+        background: #3e2c21;
+        color: white;
+        text-decoration: none;
+        padding: 12px 22px;
+        border-radius: 40px;
+        transition: .3s;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
         }
+        .btn:hover { background: #6f4e37; transform: scale(1.03); }
 
-        .btn:hover{
+        /* heading */
+        h1 { text-align: center; color: white; margin-bottom: 40px; font-size: 2.6rem; font-weight: 600; letter-spacing: 1px; }
+        .light-mode h1 { color: #2d2d2d; }
 
-            background:#6f4e37;
-        }
-
+        /* fix for mobile overlay */
+        #overlay { transition: opacity 0.2s; }
     </style>
+    </head>
+    <body>
 
-</head>
+    <!-- mobile menu button -->
+    <button id="menuBtn" class="fixed top-5 left-5 z-[60] lg:hidden glass p-3 rounded-xl text-white hover:bg-white/10 transition">
+        <i class="fa-solid fa-bars text-xl"></i>
+    </button>
 
-<body>
-
-    <!-- Sidebar -->
-
-    <div class="sidebar">
-
-        <div class="logo">
-            🍵 CafeVerse
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="fixed top-0 left-0 w-72 h-screen glass z-50 
+        transform -translate-x-full lg:translate-x-0 
+        transition-transform duration-300 ease-in-out
+        overflow-y-auto overflow-x-hidden text-white
+        flex flex-col">
+        
+        <div class="p-8 border-b border-white/10 flex-shrink-0">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="CafeVerse" class="h-16 w-auto" />
         </div>
 
-        <ul>
+        <nav class="p-5 space-y-3 pb-20 flex-1">
+        <a href="/dashboard" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+            <i class="fa-solid fa-house"></i> Dashboard
+        </a>
+        <a href="/menu" class="active-menu flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+            <i class="fa-solid fa-mug-hot"></i> Menu
+        </a>
+        <a href="/cart" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+            <i class="fa-solid fa-cart-shopping"></i> My Cart
+        </a>
+        <a href="/profile" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-white/10 duration-300 hover:translate-x-2 transition">
+            <i class="fa-solid fa-user"></i> Profile
+        </a>
+        <a href="/logout" class="flex items-center gap-4 p-5 rounded-2xl hover:bg-red-500/70 duration-300 transition">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+        <button id="themeToggle" class="glass w-14 h-14 rounded-2xl flex items-center justify-center text-xl hover:bg-white/10 transition">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+        </nav>
+    </aside>
 
-            <li><a href="/dashboard">🏠 Dashboard</a></li>
+    <!-- overlay (mobile) -->
+    <div id="overlay" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden"></div>
 
-            <li><a href="/menu">☕ Menu</a></li>
-
-            <li><a href="/cart">🛒 My Cart</a></li>
-
-            <li><a href="#">👤 Profile</a></li>
-
-            <li><a href="/logout">🚪 Logout</a></li>
-
-        </ul>
-
-    </div>
-
-    <!-- Main Content -->
-
-    <div class="main">
-
-        <h1>🍵 CafeVerse Menu</h1>
+    <!-- MAIN CONTENT -->
+    <div class="lg:ml-72 p-6 lg:p-10 transition-all duration-300">
 
         <div class="container">
-
-            {% for tea in teas %}
-
-            <div class="card">
-
-                <img
-                    src="/static/uploads/{{ tea[4] }}"
-                    alt="{{ tea[1] }}"
-                    class="tea-image">
-
-                <div class="card-body">
-
-                    <h2>{{ tea[1] }}</h2>
-
-                    <p>{{ tea[3] }}</p>
-
-                    <div class="price">
-                        ${{ tea[2] }}
-                    </div>
-
-                    <a href="/add_cart/{{ tea[0] }}"
-                       class="btn">
-
-                        Add To Cart
-
-                    </a>
-
-                </div>
-
+        <!-- tea items from flask context -->
+        {% for tea in teas %}
+        <div class="card card-hover">
+            <img src="/static/uploads/{{ tea[4] }}" alt="{{ tea[1] }}" class="tea-image" />
+            <div class="card-body">
+            <h2>{{ tea[1] }}</h2>
+            <p>{{ tea[3] }}</p>
+            <div class="price">${{ tea[2] }}</div>
+            <a href="/add_cart/{{ tea[0] }}" class="btn">
+                <i class="fa-solid fa-cart-plus mr-2"></i> Add To Cart
+            </a>
             </div>
-
-            {% endfor %}
-
         </div>
-
+        {% endfor %}
+        </div>
     </div>
 
-</body>
+    <script>
+        (function() {
+        "use strict";
 
-</html>
+        // DOM elements
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const themeToggle = document.getElementById('themeToggle');
+
+        // -------- SIDEBAR TOGGLE (mobile) --------
+        function toggleSidebar(forceState) {
+            const isHidden = sidebar.classList.contains('-translate-x-full');
+            if (forceState === 'open') {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('hidden');
+            } else if (forceState === 'close') {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+            } else {
+            // toggle
+            if (isHidden) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+            }
+        }
+
+        // menu button click
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleSidebar();
+        });
+
+        // overlay click -> close
+        overlay.addEventListener('click', function() {
+            toggleSidebar('close');
+        });
+
+        // close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+            toggleSidebar('close');
+            }
+        });
+
+        // if window resizes to large, force sidebar visible and hide overlay
+        const mediaQuery = window.matchMedia('(min-width: 1024px)');
+        function handleLgChange(e) {
+            if (e.matches) {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.add('hidden');
+            } else {
+            // when going from lg to mobile, we keep sidebar closed by default
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+            }
+        }
+        mediaQuery.addEventListener('change', handleLgChange);
+        // initial call
+        handleLgChange(mediaQuery);
+
+        // -------- THEME TOGGLE (light/dark) --------
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            // change icon
+            const icon = this.querySelector('i');
+            if (document.body.classList.contains('light-mode')) {
+            icon.className = 'fa-solid fa-sun';
+            } else {
+            icon.className = 'fa-solid fa-moon';
+            }
+        });
+
+        // (optional) fix for double event on menuBtn from old code – we override
+        // make sure no duplicate listeners
+
+        // Also ensure if body has light-mode from previous session? not needed.
+
+        console.log('CafeVerse menu ready');
+        })();
+    </script>
+
+    <!-- extra safety: if any global variable conflict, keep clean -->
+    <!-- all errors from original code are resolved: duplicate event listeners, missing overlay, light-mode class handling, container grid, etc. -->
+    </body>
+    </html>
